@@ -375,7 +375,7 @@ function CarehomeMainContainer({ flags, ldClient, user, signOut }) {
       </div>
       <div class="navbar-right">
               <QuestionMarkIcon />
-              <SarchIcon />
+              <SearchIcon />
               <NotificationsIcon />
               <Avatar alt="My Profile" src={`https://proxximosamplifybucket133936-expstage.s3.eu-west-2.amazonaws.com/users/${encodeURIComponent(user.attributes.email).replace('%20','+')}/avatar.png`} />
       </div>
