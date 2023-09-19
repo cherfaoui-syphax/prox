@@ -1,0 +1,150 @@
+.pill {
+    background-color: #EBF0FE;
+    border: none;
+    color: black;
+    padding-left: 20px ;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 500px;
+    
+  }
+  
+  .button:hover {
+    background-color: #f1f1f1;
+  }
+  .search-button {
+      background-color : #57BEC8 ;
+      border: none;
+      color: white;
+      display: inline-block;
+      border-radius: 500px ;
+      padding: 10px 25px;
+      cursor: pointer;
+      font-size : 13px;
+  
+  }
+  
+  .drop-menu{
+    background-color: #EBF0FE;
+    border: none;
+    color: gray;
+    padding-left: 10px ;
+    margin-right: 20px ;
+    text-align: left;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    min-width:50px;
+    border-left : 1px solid  black;
+  
+    
+  }
+  
+  .drop-menu-label{
+    font-size : 13px;
+    color: black;
+    padding: 5px 10px 5px 25px;
+    display: inline-block;
+  
+    
+  }
+
+
+  .icon-container {
+    display: inline-block;
+    background-color: #ebf0fe;
+    border-radius: 80%;
+    padding: 0px;
+    width: 32px;
+    text-align: center;
+    margin-left: 7px;
+    margin-top: 0px;
+    position: absolute;
+    top: -5px;
+  }
+  .download-icon {
+    margin-left: 2px;
+    margin-top: 4px;
+    padding-top: 4px;
+    font-size: 15px;
+    color:"#435282";
+  }
+
+  .horizontal-line {
+    width: 100%;
+    height: 1px;
+    background-color: lightgrey;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.horizontal-line-no-margin {
+    width: 100%;
+    height: 1px;
+    background-color: lightgrey;
+
+}
+
+.add-new-infection-button {
+  text-decoration: underline;
+  background-color : #57BEC8 ;
+  border: none;
+  color: white;
+  display: inline-block;
+  border-radius: 500px ;
+  padding: 8px 30px 0px 25px;
+  cursor: pointer;
+  font-size : 13px;
+
+}
+
+.view-action-button {
+  text-decoration: underline;
+  background-color : #7D8BB7 ;
+  border: none;
+  color: white;
+  display: inline-block;
+  border-radius: 500px ;
+  padding: 10px 25px;
+  cursor: pointer;
+  font-size : 13px;
+  font-weight: bold;
+
+}
+
+.view-map-button {
+  text-decoration: underline;
+  background-color : #2B3552 ;
+  border: none;
+  color: white;
+  display: inline-block;
+  border-radius: 500px ;
+  padding: 10px 25px;
+  cursor: pointer;
+  font-size : 13px;
+  font-weight: bold;
+
+
+}
+
+.search-wrapper {
+  display:inline-block;
+  border-radius:  500px;
+  background-color: white;
+
+}
+.search-wrapper  input,
+.search-wrapper  button {
+  padding: 0 25px;
+
+border:none;
+  background-color:transparent;
+  border:0;
+  outline: none;
+}
+
+.search-wrapper  button {
+  padding: 10px 25px;
+
+}

@@ -38,7 +38,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CaseDetail from "../CaseDetail/CaseDetail";
 import MapTab from "../MapTab/MapTab";
 import { withLDConsumer, useFlags } from 'launchdarkly-react-client-sdk';
-
+import InfectionControlConsequences from "./CareHomeTabs/InfectionControlConsequences";
+import InfectionControlSummary from "./CareHomeTabs/InfectionControlSummary";
 const drawerWidth = 240;
 
 function CarehomeMainContainer({ flags, ldClient, user, signOut }) {
@@ -699,7 +700,9 @@ function CarehomeMainContainer({ flags, ldClient, user, signOut }) {
                 />
                 <Route path="map" element={<LiveMap />} />
                 <Route path="new-incident" element={<NewIncident />} />
-              </Routes>
+                <Route path="infection-safe" element={<InfectionControlConsequences />} />
+                <Route path="infection-summary" element={<InfectionControlSummary />} />
+              </Routes> 
             </Box>
           </Grid>
         </Grid>
