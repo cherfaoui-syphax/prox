@@ -1,6 +1,6 @@
 import React from "react";
 
-function DeadBatteryIcon({ id, x, y, style } : any ) {
+function DeadBatteryIcon({ id, x, y, style } : any   ) {
   return (
     <svg
       id={id ? id : ""}

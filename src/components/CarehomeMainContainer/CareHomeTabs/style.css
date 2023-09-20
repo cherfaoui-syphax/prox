@@ -2,11 +2,12 @@
     background-color: #EBF0FE;
     border: none;
     color: black;
-    padding-left: 20px ;
+    padding-left: 50px ;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     border-radius: 500px;
+    height: fit-content;
     
   }
   
@@ -29,20 +30,22 @@
     background-color: #EBF0FE;
     border: none;
     color: gray;
-    padding-left: 10px ;
-    margin-right: 20px ;
+    padding-left: 30px ;
+    margin-right: 50px ;
     text-align: left;
     text-decoration: none;
     display: inline-block;
     cursor: pointer;
     min-width:50px;
     border-left : 1px solid  black;
+    font-size: 18px;
+
   
     
   }
   
   .drop-menu-label{
-    font-size : 13px;
+    font-size : 17px;
     color: black;
     padding: 5px 10px 5px 25px;
     display: inline-block;

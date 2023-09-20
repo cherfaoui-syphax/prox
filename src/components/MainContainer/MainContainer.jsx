@@ -45,7 +45,7 @@ import Avatar from "@mui/material/Avatar";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CaseDetail from "../CaseDetail/CaseDetail";
 import MapTab from "../MapTab/MapTab";
-import { withLDConsumer, useFlags } from 'launchdarkly-react-client-sdk';
+import { withLDConsumer, useFlags } from "launchdarkly-react-client-sdk";
 
 const drawerWidth = 240;
 
@@ -53,9 +53,9 @@ function MainContainer({ flags, ldClient, user, signOut }) {
   // const flags = useFlags();
   if (ldClient) {
     ldClient.identify({
-      "kind": "user",
-      "key": user.attributes.email,
-      "name": user.attributes.email,
+      kind: "user",
+      key: user.attributes.email,
+      name: user.attributes.email,
     });
   }
 
@@ -295,128 +295,9 @@ function MainContainer({ flags, ldClient, user, signOut }) {
     }
   });
 
-  const drawer = (
-    <div>
-      <div class="logocontainer">
-        {logoUrl ? (
-          <a href="https://proxximos.com" style={{ border: 0, outline: 0 }}>
-            <img src={logoUrl} style={{ height: "50px" }} alt="Proxximos" />
-          </a>
-        ) : (
-          <></>
-        )}
-      </div>
-
-      {/* <Toolbar /> */}
-      <List>
-        {[
-          { text: "Home", link: "/" },
-          { text: "Cases", link: "cases" },
-          { text: "Live map", link: "map" },
-          { text: "Alerts", link: "alerts" },
-          { text: "Mitigations", link: "mitigations" },
-          { text: "Users", link: "users" },
-          { text: "Register device", link: "register-device" },
-          { text: "Report an illness", link: "report-illness" },
-          { text: "Sign out" },
-        ].map((item, index) => (
-          <ListItem key={item.text} disablePadding>
-            {item.text === "Sign out" ? (
-              <ListItemButton
-                onClick={signOut}
-                sx={[
-                  activeNavLink === item.text
-                    ? {
-                        background: "rgba(0, 0, 0, 0.19)",
-                      }
-                    : {},
-                  {
-                    "&:hover": {
-                      background: "rgba(193, 193, 194, 0.1)",
-                    },
-                  },
-                ]}
-              >
-                {/* <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon> */}
-                <ListItemText
-                  primary={
-                    <>
-                      <span style={{ paddingRight: "20px" }}>
-                        <strong>{item.text}</strong>
-                      </span>
-                      {item.text === "Alerts" && (
-                        <Badge
-                          badgeContent={<strong>{alertsQty}</strong>}
-                          color="error"
-                        />
-                      )}
-                      {item.text === "Mitigations" && (
-                        <Badge
-                          badgeContent={<strong>{mitigationsQty}</strong>}
-                          color="error"
-                        />
-                      )}
-                    </>
-                  }
-                  primaryTypographyProps={sidebarTextStyles}
-                />
-              </ListItemButton>
-            ) : (
-              <ListItemButton
-                onClick={() => {
-                  navigate(item.link);
-                }}
-                sx={[
-                  activeNavLink === item.text
-                    ? {
-                        background: "rgba(0, 0, 0, 0.19)",
-                      }
-                    : {},
-                  {
-                    "&:hover": {
-                      background: "rgba(193, 193, 194, 0.1)",
-                    },
-                  },
-                ]}
-              >
-                {/* <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon> */}
-                <ListItemText
-                  primary={
-                    <>
-                      <span style={{ paddingRight: "20px" }}>{item.text}</span>
-                      {item.text === "Alerts" && (
-                        <Badge
-                          badgeContent={<strong>{alertsQty}</strong>}
-                          color="error"
-                        />
-                      )}
-                      {item.text === "Mitigations" && (
-                        <Badge
-                          badgeContent={<strong>{mitigationsQty}</strong>}
-                          color="error"
-                        />
-                      )}
-                    </>
-                  }
-                  primaryTypographyProps={sidebarTextStyles}
-                />
-              </ListItemButton>
-            )}
-          </ListItem>
-        ))}
-      </List>
-    </div>
-  );
-
   return (
     <ThemeProvider theme={theme}>
-      <Box
-        sx={{ display: "flex", position: "absolute", zIndex: 3, width: "100%" }}
-      >
+      <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <AppBar
           position="fixed"

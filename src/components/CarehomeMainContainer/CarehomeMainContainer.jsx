@@ -1,62 +1,160 @@
 import React, { useState } from "react";
 import HomeTemplate from "../../components/HomeTemplate/HomeTemplate";
+import InfectionSafe from "../../components/CarehomeInfectionSafe/CarehomeInfectionSafe";
 import LiveMap from "../../components/LiveMap/LiveMap";
 import IncidentsListTab from "../../components/IncidentsListTab/IncidentsListTab";
+import InfectionControlConsequences from "./CareHomeTabs/InfectionControlConsequences";
+import InfectionControlSummary from "./CareHomeTabs/InfectionControlSummary";
 import { Grid, Avatar } from "@mui/material";
-import { 
-  Error as ExclamationMarkIcon, 
-  Home as HomeIcon, 
+import {
+  Error as ExclamationMarkIcon,
+  Home as HomeIcon,
   Person as PersonIcon,
   Groups as GroupsIcon,
   ViewInAr as CubeIcon,
   InsertDriveFile as DocumentIcon,
   QuestionMark as QuestionMarkIcon,
   Search as SearchIcon,
-  Notifications as NotificationsIcon
-  } from '@mui/icons-material';
+  Notifications as NotificationsIcon,
+  KeyboardArrowDown as DownIcon,
+} from "@mui/icons-material";
 // import { Authenticator } from '@aws-amplify/ui-react';
 import { Storage } from "aws-amplify";
 import { withAuthenticator } from "@aws-amplify/ui-react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import CssBaseline from "@mui/material/CssBaseline";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import InputBase from "@mui/material/InputBase";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import Toolbar from "@mui/material/Toolbar";
-import Badge from "@mui/material/Badge";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
-import Button from "@mui/material/Button";
 import dummyMetadata from "../MapTab/dummy_metadata.json";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
+import {
+  Tabs,
+  Tab,
+  Menu,
+  MenuItem,
+  Badge,
+  Toolbar,
+  InputBase,
+  AppBar,
+  CssBaseline,
+  Box,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemButton,
+  Button,
+} from "@mui/material";
 import NewIncident from "../NewIncident/NewIncident";
 import { styled, alpha } from "@mui/material/styles";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CaseDetail from "../CaseDetail/CaseDetail";
 import MapTab from "../MapTab/MapTab";
-import { withLDConsumer, useFlags } from 'launchdarkly-react-client-sdk';
-import InfectionControlConsequences from "./CareHomeTabs/InfectionControlConsequences";
-import InfectionControlSummary from "./CareHomeTabs/InfectionControlSummary";
-const drawerWidth = 240;
+import { withLDConsumer, useFlags } from "launchdarkly-react-client-sdk";
+import ContaminatedRoom from "./CareHomeTabs/ContaminatedRoom";
 
 function CarehomeMainContainer({ flags, ldClient, user, signOut }) {
   // const flags = useFlags();
   if (ldClient) {
     ldClient.identify({
-      "kind": "user",
-      "key": user.attributes.email,
-      "name": user.attributes.email,
+      kind: "user",
+      key: user.attributes.email,
+      name: user.attributes.name,
     });
   }
+
+  console.log(user.attributes);
 
   console.log(flags);
   const navigate = useNavigate();
   const location = useLocation();
-  const [logoUrl, setLogoUrl] = useState("https://proxximosamplifybucket133936-expstage.s3.eu-west-2.amazonaws.com/sunburst_care_services.png");
-  const [middleNavbarImage, setMiddleNavbarImage] = useState("https://proxximosamplifybucket133936-expstage.s3.eu-west-2.amazonaws.com/proxximos_safer_care.png");
+
+  /* Location menu */
+
+  const [locationMenuAnchorEl, setLocationMenuAnchorEl] = React.useState(null);
+  const locationMenuOpen = Boolean(locationMenuAnchorEl);
+
+  const handleLocationMenuClick = (event) => {
+    setLocationMenuAnchorEl(event.currentTarget);
+  };
+
+  const handleLocationMenuClose = () => {
+    setLocationMenuAnchorEl(null);
+  };
+
+  /* User menu */
+
+  const [userMenuAnchorEl, setUserMenuAnchorEl] = React.useState(null);
+  const userMenuOpen = Boolean(userMenuAnchorEl);
+
+  const handleUserMenuClick = (event) => {
+    setUserMenuAnchorEl(event.currentTarget);
+  };
+
+  const handleUserMenuClose = () => {
+    setUserMenuAnchorEl(null);
+  };
+
+  /* Infection safe menu */
+
+  const [infectionSafeMenuAnchorEl, setInfectionSafeMenuAnchorEl] =
+    React.useState(null);
+  const infectionSafeMenuOpen = Boolean(infectionSafeMenuAnchorEl);
+
+  const handleInfectionSafeMenuClick = (event) => {
+    event.stopPropagation();
+    setInfectionSafeMenuAnchorEl(event.currentTarget);
+  };
+
+  const handleInfectionSafeMenuClose = () => {
+    setInfectionSafeMenuAnchorEl(null);
+  };
+
+  /* Team safe menu */
+
+  const [teamSafeMenuAnchorEl, setTeamSafeMenuAnchorEl] = React.useState(null);
+  const teamSafeMenuOpen = Boolean(teamSafeMenuAnchorEl);
+
+  const handleTeamSafeMenuClick = (event) => {
+    setTeamSafeMenuAnchorEl(event.currentTarget);
+  };
+
+  const handleTeamSafeMenuClose = () => {
+    setTeamSafeMenuAnchorEl(null);
+  };
+
+  /* Resident safe menu */
+
+  const [residentSafeMenuAnchorEl, setResidentSafeMenuAnchorEl] =
+    React.useState(null);
+  const residentSafeMenuOpen = Boolean(residentSafeMenuAnchorEl);
+
+  const handleResidentSafeMenuClick = (event) => {
+    setResidentSafeMenuAnchorEl(event.currentTarget);
+  };
+
+  const handleResidentSafeMenuClose = () => {
+    setResidentSafeMenuAnchorEl(null);
+  };
+
+  /* Asset safe menu */
+
+  const [assetSafeMenuAnchorEl, setAssetSafeMenuAnchorEl] =
+    React.useState(null);
+  const assetSafeMenuOpen = Boolean(assetSafeMenuAnchorEl);
+
+  const handleAssetSafeMenuClick = (event) => {
+    setAssetSafeMenuAnchorEl(event.currentTarget);
+  };
+
+  const handleAssetSafeMenuClose = () => {
+    setAssetSafeMenuAnchorEl(null);
+  };
+
+  const [currentLocation, setCurrentLocation] = useState(
+    "Newton House, Building 4"
+  );
+  const [logoUrl, setLogoUrl] = useState(
+    "https://proxximosamplifybucket133936-expstage.s3.eu-west-2.amazonaws.com/sunburst_care_services.png"
+  );
+  const [middleNavbarImage, setMiddleNavbarImage] = useState(
+    "https://proxximosamplifybucket133936-expstage.s3.eu-west-2.amazonaws.com/proxximos_safer_care.png"
+  );
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeNavLink, setActiveNavLink] = useState("Home");
   const [alertsQty, setAlertsQty] = useState(12);
@@ -183,32 +281,110 @@ function CarehomeMainContainer({ flags, ldClient, user, signOut }) {
   };
 
   const appBarStyles = {
-      //width: { sm: `calc(100% - ${drawerWidth}px)` },
-      mt: { sm: `127px` },
-      background: "#fff",
-      color: "#666",
-      boxShadow: "0px 1px 10px 0px rgb(0 0 0 / 15%)",
-      borderBottom: "1px solid #e3e3e3",
-      display: "flex",
-      alignContent: "center",
-      justifyContent: "center"
-  }
+    //width: { sm: `calc(100% - ${drawerWidth}px)` },
+    mt: { sm: `64px` },
+    background: "#fff",
+    color: "#283555",
+    boxShadow: "0px 1px 10px 0px rgb(0 0 0 / 15%)",
+    borderBottom: "1px solid #e3e3e3",
+    display: "flex",
+    alignContent: "center",
+    justifyContent: "center",
+  };
+
+  const logoStyle = {
+    height: "37px",
+    width: "154px",
+  };
+
+  const centerNavbarImageStyle = {
+    height: "41px",
+    width: "148px",
+  };
+
+  const upperRightUserMenuStyle = {
+    display: "inline-flex",
+    alignItems: "center",
+    color: "#283555",
+  };
+
+  const downCaretStyle = {
+    color: "#919191",
+  };
+
+  const lowerNavDownCaretStyle = {
+    marginRight: "-11px",
+    marginLeft: "11px",
+  };
+
+  const currentLocationStyle = {
+    margin: 5,
+    color: "#283555",
+    display: "inline-flex",
+    alignItems: "center",
+  };
+
+  const currentLocationTextStyle = {
+    marginLeft: 2,
+  };
+
+  const navbarUserInfo = {
+    margin: 8,
+    marginLeft: 12,
+    marginRight: 20,
+    lineHeight: "1.3",
+  };
+
+  const navbarUserInfoFirstLine = {
+    fontWeight: 600,
+    fontSize: 14,
+  };
+
+  const navbarUserInfoSecondLine = {
+    fontWeight: 400,
+  };
+
+  const upperNavbarIconStyle = {
+    background: "#1763f7",
+    borderRadius: 30,
+    color: "#EAF0FF",
+    padding: 5,
+  };
+
+  const upperNavbarIconContainerStyle = {
+    background: "#EAF0FF",
+    borderRadius: 30,
+    width: 40,
+    height: 40,
+    padding: 8,
+    margin: 5,
+  };
+
+  const upperAvatarContainerStyle = {
+    background: "#EAF0FF",
+    borderRadius: 30,
+    width: 40,
+    height: 40,
+    margin: 5,
+  };
 
   const toolbarStyle = {
     height: 58,
     borderTopWidth: 1,
     borderTopColor: "#F2F2F2",
     borderRightStyle: "solid",
+    borderRightWidth: 1,
+    borderRightColor: "#F2F2F2",
+    borderRightStyle: "solid",
     borderBottomWidth: 1,
     borderBottomColor: "#F2F2F2",
     borderBottomStyle: "solid",
-  }
+  };
 
-  const firstLowerTabStyle = {
-    borderLeftWidth: 1,
-    borderLeftColor: "#F2F2F2",
-    borderLeftStyle: "solid",
-  }
+  const lastLowerTabStyle = {
+    borderRightWidth: 0,
+    borderRightColor: "#fff",
+  };
 
   const lowerTabStyles = {
     display: "inline-flex",
@@ -223,12 +399,20 @@ function CarehomeMainContainer({ flags, ldClient, user, signOut }) {
     borderRightWidth: 1,
     borderRightColor: "#F2F2F2",
     borderRightStyle: "solid",
-    paddingRight: 35,
-    paddingLeft: 35,
+    paddingRight: 24,
+    paddingLeft: 24,
     minWidth: 0,
     minHeight: 0,
     paddingTop: 0,
     paddingBottom: 0,
+  };
+
+  const navbarCenterColumn = {
+    display: "inline-flex",
+    alignItems: "center",
+    position: "absolute",
+    left: "50%",
+    marginLeft: "-185px",
   };
 
   const tabContainerStyle = {
@@ -243,9 +427,9 @@ function CarehomeMainContainer({ flags, ldClient, user, signOut }) {
     height: 28,
     background: "#EAF0FF",
     borderRadius: 30,
-    padding: '6px',
-    marginRight: '13px !important',
-  }
+    padding: "6px",
+    marginRight: "13px !important",
+  };
 
   const topNavBarRight = {
     display: "flex",
@@ -321,11 +505,20 @@ function CarehomeMainContainer({ flags, ldClient, user, signOut }) {
     setMobileOpen(!mobileOpen);
   };
 
-  // const getLogo = async () => {
-  //   const logo = await Storage.get("logo_transparent.png", { level: "public" });
-
-  //   setLogoUrl(logo);
-  // };
+  const upperToolbarStyle = {
+    background: "#FFF",
+    display: "inline-flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 0,
+    borderRightWidth: 1,
+    borderTopWidth: 1,
+    borderLeftWidth: 1,
+    borderColor: "#F2F2F2",
+    borderStyle: "solid",
+    color: "#283555",
+    fontSize: 12,
+  };
 
   const onChangeIncidentText = (evt) => {
     setIncidentText(evt.target.value);
@@ -345,152 +538,9 @@ function CarehomeMainContainer({ flags, ldClient, user, signOut }) {
     // }
   });
 
-  const drawer = (
-    <div className="drawer">
-      <div class="logocontainer">
-      {middleNavbarImage ? (
-                <a
-                  href="https://proxximos.com"
-                  style={{ border: 0, outline: 0 }}
-                >
-                  <img src={middleNavbarImage} style={{ height: "62px", width: "266px" }} alt="Proxximos" />
-
-                </a>
-              ) : (
-                <></>
-              )}
-
-      </div>
-      <div class="center-navbar-image">
-            {logoUrl ? (
-                <a
-                  href="https://proxximos.com"
-                  style={{ border: 0, outline: 0 }}
-                >
-                  <img src={logoUrl} style={{ height: "90px", width: "308px" }} alt="Sunburst Care Services" />
-
-                </a>
-              ) : (
-                <></>
-              )}
-      </div>
-      <div class="navbar-right">
-              <QuestionMarkIcon />
-              <SearchIcon />
-              <NotificationsIcon />
-              <Avatar alt="My Profile" src={`https://proxximosamplifybucket133936-expstage.s3.eu-west-2.amazonaws.com/users/${encodeURIComponent(user.attributes.email).replace('%20','+')}/avatar.png`} />
-      </div>
-
-      {/* <Toolbar /> */}
-      <List>
-        {[
-          { text: "Home", link: "/" },
-          { text: "Cases", link: "cases" },
-          { text: "Live map", link: "map" },
-          { text: "Alerts", link: "alerts" },
-          { text: "Mitigations", link: "mitigations" },
-          { text: "Users", link: "users" },
-          { text: "Register device", link: "register-device" },
-          { text: "Report an illness", link: "report-illness" },
-          { text: "Sign out" },
-        ].map((item, index) => (
-          <ListItem key={item.text} disablePadding>
-            {item.text === "Sign out" ? (
-              <ListItemButton
-                onClick={signOut}
-                sx={[
-                  activeNavLink === item.text
-                    ? {
-                        background: "rgba(0, 0, 0, 0.19)",
-                      }
-                    : {},
-                  {
-                    "&:hover": {
-                      background: "rgba(193, 193, 194, 0.1)",
-                    },
-                  },
-                ]}
-              >
-                {/* <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon> */}
-                <ListItemText
-                  primary={
-                    <>
-                      <span style={{ paddingRight: "20px" }}>
-                        <strong>{item.text}</strong>
-                      </span>
-                      {item.text === "Alerts" && (
-                        <Badge
-                          badgeContent={<strong>{alertsQty}</strong>}
-                          color="error"
-                        />
-                      )}
-                      {item.text === "Mitigations" && (
-                        <Badge
-                          badgeContent={<strong>{mitigationsQty}</strong>}
-                          color="error"
-                        />
-                      )}
-                    </>
-                  }
-                  primaryTypographyProps={sidebarTextStyles}
-                />
-              </ListItemButton>
-            ) : (
-              <ListItemButton
-                onClick={() => {
-                  navigate(item.link);
-                }}
-                sx={[
-                  activeNavLink === item.text
-                    ? {
-                        background: "rgba(0, 0, 0, 0.19)",
-                      }
-                    : {},
-                  {
-                    "&:hover": {
-                      background: "rgba(193, 193, 194, 0.1)",
-                    },
-                  },
-                ]}
-              >
-                {/* <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon> */}
-                <ListItemText
-                  primary={
-                    <>
-                      <span style={{ paddingRight: "20px" }}>{item.text}</span>
-                      {item.text === "Alerts" && (
-                        <Badge
-                          badgeContent={<strong>{alertsQty}</strong>}
-                          color="error"
-                        />
-                      )}
-                      {item.text === "Mitigations" && (
-                        <Badge
-                          badgeContent={<strong>{mitigationsQty}</strong>}
-                          color="error"
-                        />
-                      )}
-                    </>
-                  }
-                  primaryTypographyProps={sidebarTextStyles}
-                />
-              </ListItemButton>
-            )}
-          </ListItem>
-        ))}
-      </List>
-    </div>
-  );
-
   return (
     <ThemeProvider theme={theme}>
-      <Box
-        sx={{ display: "flex", position: "absolute", zIndex: 3, width: "100%" }}
-      >
+      <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <AppBar
           position="fixed"
@@ -498,140 +548,133 @@ function CarehomeMainContainer({ flags, ldClient, user, signOut }) {
             //width: { sm: `calc(100% - ${drawerWidth}px)` },
             // ml: { sm: `${drawerWidth}px` },
             // background: '#283555',
-            background: "#1C54C1/",
-            // background: "green",
+            background: "#1C54C1",
             color: "#fff",
             boxShadow: "none",
             zIndex: "1200",
           }}
         >
-          <Toolbar sx={{
-            background: "#FFF",
-            display: "inline-flex",
-            justifyContent: "space-between",
-            paddingTop: "15px",
-            paddingBottom: "15px"
-          }}>
-            {/* <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          edge="start"
-          onClick={handleDrawerToggle}
-          sx={{ mr: 2, display: { sm: 'none' }, color: '#666666'}}
-        >
-          <MenuIcon />
-        </IconButton> */}
-
+          <Toolbar style={upperToolbarStyle}>
             <div class="logocontainer">
-            {middleNavbarImage ? (
+              {middleNavbarImage ? (
                 <a
                   href="https://proxximos.com"
                   style={{ border: 0, outline: 0 }}
                 >
-                  <img src={middleNavbarImage} style={{ height: "62px", width: "266px" }} alt="Proxximos" />
-
+                  <img
+                    src={middleNavbarImage}
+                    style={logoStyle}
+                    alt="Proxximos"
+                  />
                 </a>
               ) : (
                 <></>
               )}
             </div>
 
-            <div class="center-navbar-image">
-            {logoUrl ? (
+            <div class="center-navbar-image" style={navbarCenterColumn}>
+              {logoUrl ? (
                 <a
                   href="https://proxximos.com"
                   style={{ border: 0, outline: 0 }}
                 >
-                  <img src={logoUrl} style={{ height: "90px", width: "308px" }} alt="Sunburst Care Services" />
-
+                  <img
+                    src={logoUrl}
+                    style={centerNavbarImageStyle}
+                    alt="Sunburst Care Services"
+                  />
                 </a>
               ) : (
                 <></>
               )}
-            </div>
 
-            <div style={topNavBarRight}>
-                <Button
-                  sx={{ ...infoButtonStyle, ...buttonStyle }}
-                  variant="contained"
-                  color="info"
-                  onClick={openIncidentDialog}
-                >
-                  Add new case +
-                </Button>
-                <Button
-                  sx={{ minWidth: "60px", width: "50px" }}
-                  variant="text"
-                  color="primary"
-                >
-                  <Avatar>DM</Avatar>
-                </Button>
-              </div>
-
-            {/* <Box className="tabbox" sx={tabBoxStyle}>
-              <div
-                style={{ display: "flex" }}
-                onMouseEnter={(evt) => {
-                  setWardsHovered(true);
-                }}
-                onMouseLeave={(evt) => {
-                  setWardsHovered(false);
+              <Button
+                aria-controls={locationMenuOpen ? "basic-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={locationMenuOpen ? "true" : undefined}
+                onClick={handleLocationMenuClick}
+              >
+                <div id="location-menu-label" style={currentLocationStyle}>
+                  <DownIcon style={downCaretStyle} />
+                  <span style={currentLocationTextStyle}>
+                    {currentLocation}
+                  </span>
+                </div>
+              </Button>
+              <Menu
+                id="location-menu"
+                anchorEl={locationMenuAnchorEl}
+                open={locationMenuOpen}
+                onClose={handleLocationMenuClose}
+                MenuListProps={{
+                  "aria-labelledby": "location-menu-label",
                 }}
               >
-                <Tabs
-                  style={tabContainerStyle}
-                  value={currentTab}
-                  onChange={() => {}}
-                  aria-label="Navbar"
-                  indicatorColor="primary"
-                  textColor="primary"
-                >
-                </Tabs>
-              </div>
-              
-            </Box> */}
+                <MenuItem onClick={handleLocationMenuClose}>Profile</MenuItem>
+                <MenuItem onClick={handleLocationMenuClose}>
+                  My account
+                </MenuItem>
+                <MenuItem onClick={handleLocationMenuClose}>Logout</MenuItem>
+              </Menu>
+            </div>
+
+            <div class="navbar-right" style={topNavBarRight}>
+              <span style={upperNavbarIconContainerStyle}>
+                <QuestionMarkIcon style={upperNavbarIconStyle} />
+              </span>
+              <span style={upperNavbarIconContainerStyle}>
+                <SearchIcon style={upperNavbarIconStyle} />
+              </span>
+              <span style={upperNavbarIconContainerStyle}>
+                <NotificationsIcon style={upperNavbarIconStyle} />
+              </span>
+
+              <Button
+                aria-controls={userMenuOpen ? "basic-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={userMenuOpen ? "true" : undefined}
+                onClick={handleUserMenuClick}
+              >
+                <div style={upperRightUserMenuStyle}>
+                  <DownIcon style={downCaretStyle} />
+                  <div style={upperAvatarContainerStyle}>
+                    <Avatar
+                      alt="My Profile"
+                      src={`https://proxximosamplifybucket133936-expstage.s3.eu-west-2.amazonaws.com/users/${encodeURIComponent(
+                        user.attributes.email
+                      ).replace("%20", "+")}/avatar.png`}
+                    />
+                  </div>
+                  <div style={navbarUserInfo}>
+                    <div id="user-name" style={navbarUserInfoFirstLine}>
+                      {user.attributes.name || "Test Name Here"}
+                    </div>
+                    <div style={navbarUserInfoSecondLine}>
+                      {user.attributes.profile || "Placeholder Title"}
+                    </div>
+                  </div>
+                </div>
+              </Button>
+              <Menu
+                id="user-menu"
+                anchorEl={userMenuAnchorEl}
+                open={userMenuOpen}
+                onClose={handleUserMenuClose}
+                MenuListProps={{
+                  "aria-labelledby": "user-name",
+                }}
+              >
+                <MenuItem onClick={handleUserMenuClose}>Profile</MenuItem>
+                <MenuItem onClick={handleUserMenuClose}>My account</MenuItem>
+                <MenuItem onClick={handleUserMenuClose}>Logout</MenuItem>
+              </Menu>
+            </div>
           </Toolbar>
         </AppBar>
-        {/* <Box
-      component="nav"
-      sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-      aria-label="mailbox folders"
-    >
-      <Drawer
-        variant="temporary"
-        open={mobileOpen}
-        onClose={handleDrawerToggle}
-        ModalProps={{
-          keepMounted: true, // Better open performance on mobile.
-        }}
-        sx={{
-          display: { xs: 'block', sm: 'none' },
-          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, ...sidebarStyles },
-        }}
-      >
-        {drawer}
-      </Drawer>
-      <Drawer
-        variant="permanent"
-        PaperProps={{
-          sx: sidebarStyles
-        }}
-        sx={{
-          display: { xs: 'none', sm: 'block' },
-          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-        }}
-        open
-      >
-        {drawer}
-      </Drawer>
-    </Box> */}
 
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <AppBar
-              position="fixed"
-              sx={appBarStyles}
-            >
+            <AppBar position="fixed" sx={appBarStyles}>
               <Toolbar sx={toolbarStyle} variant="dense">
                 <Box sx={tabBoxStyle}>
                   <Tabs
@@ -642,31 +685,131 @@ function CarehomeMainContainer({ flags, ldClient, user, signOut }) {
                     indicatorColor="primary"
                     textColor="primary"
                   >
-                    <Tab value="/" label="Home" icon={<HomeIcon sx={tabIconStyle} />} iconPosition="start" style={{...firstLowerTabStyle, ...lowerTabStyles}} />
-                    <Tab value="/infection-safe" label="Infection Safe" iconPosition="start" icon={<ExclamationMarkIcon sx={tabIconStyle} />} style={lowerTabStyles} />
-                    <Tab value="/team-safe" label="Team Safe" iconPosition="start"  icon={<PersonIcon sx={tabIconStyle} />} style={lowerTabStyles} />
-                    <Tab value="/resident-safe" label="Resident Safe" iconPosition="start"  icon={<GroupsIcon sx={tabIconStyle} />} style={lowerTabStyles} />
-                    <Tab value="/asset-safe" label="Asset Safe" iconPosition="start"  icon={<CubeIcon sx={tabIconStyle} />} style={lowerTabStyles} />
-                    <Tab value="/reports" label="Reports" iconPosition="start"  icon={<DocumentIcon sx={tabIconStyle} />} style={lowerTabStyles} />
+                    <Tab
+                      value="/"
+                      label="Home"
+                      icon={<HomeIcon sx={tabIconStyle} />}
+                      iconPosition="start"
+                      style={lowerTabStyles}
+                    />
 
-                    {/* <Tab value="/cases" label="Cases" icon={} style={lowerTabStyles} />
+                    <Tab
+                      value="/infection-safe"
+                      label={
+                        <>
+                          <Button
+                            aria-controls={
+                              infectionSafeMenuOpen ? "basic-menu" : undefined
+                            }
+                            aria-haspopup="true"
+                            aria-expanded={
+                              infectionSafeMenuOpen ? "true" : undefined
+                            }
+                            onClick={handleInfectionSafeMenuClick}
+                          >
+                            <span id="infection-safe-label">
+                              Infection Safe
+                            </span>
+                            <DownIcon
+                              style={{
+                                ...downCaretStyle,
+                                ...lowerNavDownCaretStyle,
+                              }}
+                            />{" "}
+                          </Button>
+                          <Menu
+                            id="infection-safe-menu"
+                            anchorEl={infectionSafeMenuAnchorEl}
+                            open={infectionSafeMenuOpen}
+                            onClose={handleInfectionSafeMenuClose}
+                            MenuListProps={{
+                              "aria-labelledby": "infection-safe-label",
+                            }}
+                          >
+                            <MenuItem
+                              onClick={(event) => {
+                                event.stopPropagation();
+                                navigate("/infection-safe/summary");
+                                handleInfectionSafeMenuClose();
+                              }}
+                            >
+                              Infection Control Summary
+                            </MenuItem>
+                            <MenuItem
+                              onClick={(event) => {
+                                event.stopPropagation();
+                                navigate("/infection-safe/consequences");
+                                handleInfectionSafeMenuClose();
+                              }}
+                            >
+                              Infection Control Consequences
+                            </MenuItem>
+                          </Menu>
+                        </>
+                      }
+                      iconPosition="start"
+                      icon={<ExclamationMarkIcon sx={tabIconStyle} />}
+                      style={lowerTabStyles}
+                    />
+                    <Tab
+                      value="/team-safe"
+                      label={
+                        <>
+                          <span id="team-safe-label">Team Safe</span>
+                          <DownIcon
+                            style={{
+                              ...downCaretStyle,
+                              ...lowerNavDownCaretStyle,
+                            }}
+                          />
+                        </>
+                      }
+                      iconPosition="start"
+                      icon={<PersonIcon sx={tabIconStyle} />}
+                      style={lowerTabStyles}
+                    />
+                    <Tab
+                      value="/resident-safe"
+                      label={
+                        <>
+                          <span id="resident-safe-label">Resident Safe</span>
+                          <DownIcon
+                            style={{
+                              ...downCaretStyle,
+                              ...lowerNavDownCaretStyle,
+                            }}
+                          />
+                        </>
+                      }
+                      iconPosition="start"
+                      icon={<GroupsIcon sx={tabIconStyle} />}
+                      style={lowerTabStyles}
+                    />
+                    <Tab
+                      value="/asset-safe"
+                      label={
+                        <>
+                          <span id="asset-safe-label">Asset Safe</span>
+                          <DownIcon
+                            style={{
+                              ...downCaretStyle,
+                              ...lowerNavDownCaretStyle,
+                            }}
+                          />
+                        </>
+                      }
+                      iconPosition="start"
+                      icon={<CubeIcon sx={tabIconStyle} />}
+                      style={lowerTabStyles}
+                    />
                     <Tab
                       value="/reports"
                       label="Reports"
-                      style={lowerTabStyles}
+                      iconPosition="start"
+                      icon={<DocumentIcon sx={tabIconStyle} />}
+                      style={{ ...lowerTabStyles, ...lastLowerTabStyle }}
                     />
-                    <Tab value="/map" label="Map" style={lowerTabStyles} /> */}
                   </Tabs>
-
-                  {/* <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ 'aria-label': 'search' }}
-              />
-            </Search> */}
                 </Box>
               </Toolbar>
             </AppBar>
@@ -681,18 +824,21 @@ function CarehomeMainContainer({ flags, ldClient, user, signOut }) {
                 // mt: "120px",
               }}
             >
-              {/* <Toolbar /> */}
-
-              {/* {location && location.pathname !== "/new-infections" && (
-            <div style={{justifyContent: 'flex-end', display: 'flex', marginBottom: '40px'}}>
-              <Button sx={{fontSize: '20px'}} variant="contained" color="error" onClick={openIncidentDialog}>
-                +
-              </Button>
-            </div>
-          )} */}
-
               <Routes>
                 <Route path="/" element={<HomeTemplate />} />
+                <Route
+                  path="/infection-safe/summary"
+                  element={<InfectionControlSummary />}
+                />
+                <Route
+                  path="/infection-safe/consequences"
+                  element={<InfectionControlConsequences />}
+                />
+                <Route
+                  path="/infection-safe/contaminated-room"
+                  element={<ContaminatedRoom />}
+                />
+
                 <Route path="cases" element={<IncidentsListTab />} />
                 <Route
                   path="case/:incidentId/detail"
@@ -700,9 +846,7 @@ function CarehomeMainContainer({ flags, ldClient, user, signOut }) {
                 />
                 <Route path="map" element={<LiveMap />} />
                 <Route path="new-incident" element={<NewIncident />} />
-                <Route path="infection-safe" element={<InfectionControlConsequences />} />
-                <Route path="infection-summary" element={<InfectionControlSummary />} />
-              </Routes> 
+              </Routes>
             </Box>
           </Grid>
         </Grid>
