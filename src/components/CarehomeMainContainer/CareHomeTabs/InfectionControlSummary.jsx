@@ -52,7 +52,7 @@ function formatDate(date) {
   const day = date.getDate();
   const year = date.getFullYear();
 
-  return `${dayOfWeek},${month} ${day} ${year}`;
+  return `${dayOfWeek}, ${month} ${day} ${year}`;
 }
 
 // Example usage:
@@ -65,79 +65,178 @@ const containerStyle = {
   paddingRight: "40px",
 };
 
+const topDateStyle = {
+  color: "#8f9ab5",
+  fontSize: 14,
+  marginBottom: 1.5,
+};
+
+const titleStyle = {
+  color: "#283555",
+  fontSize: 23,
+  fontWeight: 700,
+};
+
+const buttonTextStyle = {
+  marginBottom: 1.5,
+  color: "white",
+  textDecoration: "underline",
+  fontWeight: 600,
+  fontSize: 12,
+  fontFamily: "Open Sans",
+};
+
+const buttonIconStyle = {
+  fontSize: 20,
+  marginLeft: "-9px",
+  marginRight: "6px",
+};
+
+const buttonStyle = {
+  padding: "9px 18px 9px 18px",
+  margin: "0px 11px 0px 11px",
+  height: 38,
+};
+
+const buttonGroupContainerStyle = {
+  display: "inline-flex",
+};
+
+const searchWrapperStyle = {
+  height: 38,
+  fontSize: 12,
+  fontWeight: 500,
+  color: "#333333",
+  padding: "9px 95px 11px 20px",
+  display: "inline-flex",
+  justifyContent: "space-between",
+  position: "relative",
+};
+
+const searchWrapperInputStyle = {
+  padding: 0,
+};
+
+const searchWrapperButtonStyle = {
+  color: "#8f9ab5",
+  padding: 0,
+};
+
+const searchWrapperButtonContainerStyle = {
+  position: "absolute",
+  right: 19,
+  top: 7,
+  padding: 0,
+};
+
+const downloadLinkText = {
+  marginBottom: 1.5,
+  color: "#283555",
+  textDecoration: "underline",
+  fontWeight: 600,
+  display: "inline-block",
+  fontSize: 12,
+};
+
+const downloadIconStyle = {
+  color: "#283555",
+  fontSize: 16,
+  background: "transparent",
+  margin: 0,
+  padding: 0,
+};
+
+const downloadIconContainerStyle = {
+  display: "inline-flex",
+  background: "red",
+  position: "relative",
+  width: 25,
+  height: 25,
+  padding: 0,
+  justifyContent: "center",
+  alignItems: "center",
+  backgroundColor: "#eaf0ff",
+  marginTop: 2,
+};
+
+const downloadContainerStyle = {
+  display: "inline-flex",
+  alignItems: "center",
+  position: "relative",
+};
+
+const mainContainerNavStyle = {
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  marginBottom: 20,
+  width : "100%"
+};
+
 export default function InfectionControlSummary() {
   return (
     <div>
       <Box style={containerStyle}>
-        <Typography sx={{ mb: 1.5, color: "gray" }}>{formattedDate}</Typography>
+        <Typography sx={topDateStyle}>{formattedDate}</Typography>
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            marginTop: "20px",
-          }}
-        >
-          <Typography variant="h5" component="div" sx={{ fontWeight: "bold" }}>
-            Infection Control Consequences
+        <div style={mainContainerNavStyle}>
+          <Typography variant="h5" component="div" sx={titleStyle}>
+            Infection Control Summary
           </Typography>
-          <button className="add-new-infection-button">
-            <div
-              style={{
-                display: "flex",
-                alignItems: "top",
-                flexWrap: "wrap",
-              }}
-            >
-              <AddCircleRoundedIcon sx={{ color: "white" }} />
-              <span>
-                <Typography
-                  sx={{
-                    mb: 1.5,
-                    color: "white",
-                    textDecoration: "underline",
-                    fontWeight: "bold",
-                    marginLeft: "5px",
-                  }}
-                >
+
+          <div
+            className="button-group-container"
+            style={buttonGroupContainerStyle}
+          >
+            <button className="add-new-infection-button" style={buttonStyle}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "top",
+                  flexWrap: "wrap",
+                }}
+              >
+                <AddCircleRoundedIcon
+                  sx={{ ...buttonTextStyle, ...buttonIconStyle }}
+                />
+                <Typography sx={buttonTextStyle}>
                   Add new infection case
                 </Typography>
-              </span>
-            </div>
-          </button>
+              </div>
+            </button>
 
-          <button className="view-action-button">View Actions</button>
-          <button className="view-map-button">Map View</button>
+            <button className="view-action-button" style={buttonStyle}>
+              <Typography sx={buttonTextStyle}>View Actions</Typography>
+            </button>
 
-          <div class="search-wrapper">
-            <input placeholder="Search this page" type="text" />
-            <button>
-              <SearchRoundedIcon sx={{ color: "gray" }} />
+            <button className="view-map-button" style={buttonStyle}>
+              <Typography sx={buttonTextStyle}>Map View</Typography>
             </button>
           </div>
 
-          <div style={{ display: "inline-block" }}>
-            <div style={{ position: "relative" }}>
-              <Typography
-                sx={{
-                  mb: 1.5,
-                  color: "#435282",
-                  textDecoration: "underline",
-                  fontWeight: "bold",
-                  display: "inline-block",
-                }}
+          <div class="search-wrapper" style={searchWrapperStyle}>
+            <input
+              placeholder="Search this page"
+              type="text"
+              style={searchWrapperInputStyle}
+            />
+            <button style={searchWrapperButtonContainerStyle}>
+              <SearchRoundedIcon sx={searchWrapperButtonStyle} />
+            </button>
+          </div>
+
+          <div style={{ display: "inline-flex" }}>
+            <div style={downloadContainerStyle}>
+              <Typography sx={downloadLinkText}>Download report</Typography>
+              <div
+                className="icon-container"
+                style={downloadIconContainerStyle}
               >
-                Download report
-                <div
-                  className="icon-container"
-                  style={{ display: "inline-block" }}
-                >
-                  <DownloadIcon
-                    className="download-icon"
-                    sx={{ color: "#435282" }}
-                  />
-                </div>
-              </Typography>
+                <DownloadIcon
+                  className="download-icon"
+                  style={downloadIconStyle}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -147,7 +246,7 @@ export default function InfectionControlSummary() {
         <Card sx={{ minWidth: 275 }}>
           <Grid
             container
-            style={{ backgroundColor: "#F0F2F6", padding: "20px" }}
+            className="table-header"
           >
             <Grid item xs={1}>
               Name of case
@@ -174,20 +273,38 @@ export default function InfectionControlSummary() {
 
           {Array.from({ length: 4 }, (_, index) => index).map((number) => (
             <div>
-              <Grid container style={{ padding: "20px" }} alignItems="center">
+              <Grid
+                container
+                style={{
+                  padding: "20px",
+                  color: "#333",
+                  fontWeight: 500,
+                  fontSize: 12,
+                  fontFamily: "Open Sans",
+                }}
+                alignItems="center"
+              >
                 <Grid item xs={1}>
-                  <Typography variant="body2" sx={{ fontWeight: "bold" }}>
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      color: "#333",
+                      fontWeight: 600,
+                      fontSize: 12,
+                      fontFamily: "Open Sans",
+                    }}
+                  >
                     Elsa peter
                   </Typography>
                 </Grid>
                 <Grid item xs={1}>
-                  <Typography variant="body2">staff</Typography>
+                  staff
                 </Grid>
                 <Grid item xs={2}>
-                  <Typography variant="body2">{formattedDate}</Typography>
+                  {formattedDate}
                 </Grid>
                 <Grid item xs={2}>
-                  <Typography variant="body2">Respiratory</Typography>
+                  Respiratory
                 </Grid>
                 <Grid item xs={2}>
                   <div
@@ -202,10 +319,12 @@ export default function InfectionControlSummary() {
                       <Typography
                         sx={{
                           mb: 1.5,
-                          color: "#57BEC8",
+                          mt: "2px",
                           textDecoration: "underline",
-                          fontWeight: "bold",
-                          marginLeft: "20px",
+                          color: "#01C1D3",
+                          fontWeight: 600,
+                          fontSize: 12,
+                          fontFamily: "Open Sans",
                         }}
                       >
                         Cohorting
@@ -226,9 +345,12 @@ export default function InfectionControlSummary() {
                       <Typography
                         sx={{
                           mb: 1.5,
-                          color: "blue",
+                          color: "#2800D0",
                           textDecoration: "underline",
                           marginLeft: "8px",
+                          fontWeight: 600,
+                          fontSize: 12,
+                          fontFamily: "Open Sans",
                         }}
                       >
                         List of contacts
@@ -249,9 +371,12 @@ export default function InfectionControlSummary() {
                       <Typography
                         sx={{
                           mb: 1.5,
-                          color: "blue",
+                          color: "#1763F7",
                           textDecoration: "underline",
                           marginLeft: "8px",
+                          fontWeight: 600,
+                          fontSize: 12,
+                          fontFamily: "Open Sans",
                         }}
                       >
                         Location history

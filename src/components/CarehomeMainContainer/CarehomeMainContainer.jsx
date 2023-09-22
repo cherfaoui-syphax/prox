@@ -22,22 +22,16 @@ import {
 import { Storage } from "aws-amplify";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
-import dummyMetadata from "../MapTab/dummy_metadata.json";
+// import dummyMetadata from "../MapTab/dummy_metadata.json";
 import {
   Tabs,
   Tab,
   Menu,
   MenuItem,
-  Badge,
   Toolbar,
-  InputBase,
   AppBar,
   CssBaseline,
   Box,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemButton,
   Button,
 } from "@mui/material";
 import NewIncident from "../NewIncident/NewIncident";
@@ -46,7 +40,6 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CaseDetail from "../CaseDetail/CaseDetail";
 import MapTab from "../MapTab/MapTab";
 import { withLDConsumer, useFlags } from "launchdarkly-react-client-sdk";
-import ContaminatedRoom from "./CareHomeTabs/ContaminatedRoom";
 
 function CarehomeMainContainer({ flags, ldClient, user, signOut }) {
   // const flags = useFlags();
@@ -101,7 +94,10 @@ function CarehomeMainContainer({ flags, ldClient, user, signOut }) {
     setInfectionSafeMenuAnchorEl(event.currentTarget);
   };
 
-  const handleInfectionSafeMenuClose = () => {
+  const handleInfectionSafeMenuClose = (event) => {
+    if (event) {
+      event.stopPropagation();
+    }
     setInfectionSafeMenuAnchorEl(null);
   };
 
@@ -206,78 +202,11 @@ function CarehomeMainContainer({ flags, ldClient, user, signOut }) {
     },
   });
 
-  const Search = styled("div")(({ theme }) => ({
-    position: "relative",
-    border: "1px solid #e1e1e1",
-    borderRadius: "5px",
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(3),
-      width: "auto",
-    },
-  }));
-
-  const SearchIconWrapper = styled("div")(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  }));
-
-  const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  const navbarDropdownStyle = {
+    marginLeft: "-42px",
+    paddingLeft: "42px",
     color: "inherit",
-    "& .MuiInputBase-input": {
-      padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
-      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-      transition: theme.transitions.create("width"),
-      width: "100%",
-      [theme.breakpoints.up("md")]: {
-        width: "20ch",
-      },
-    },
-  }));
-
-  const tabStyles = {
-    color: "#fff",
-    display: "flex",
-  };
-
-  const buttonStyle = {
-    textTransform: "none",
-    fontWeight: 600,
-    borderRadius: 30,
-    padding: "5px 25px",
-    color: "#1C54C1",
-    fontSize: 13,
-  };
-
-  const plusIconStyle = {
-    fontSize: 23,
-    lineHeight: 1,
-    fontWeight: 100,
-    margin: "-4px 0px 0px 7px",
-  };
-
-  const infoButtonStyle = {
-    color: theme.palette.primary,
-  };
-
-  const topNavIcon = {
-    fontSize: "20px",
-    color: "#fff",
-    padding: "0px",
-    minWidth: "39px",
-    margin: "0px",
+    fontWeight: "inherit",
   };
 
   const appBarStyles = {
@@ -698,6 +627,8 @@ function CarehomeMainContainer({ flags, ldClient, user, signOut }) {
                       label={
                         <>
                           <Button
+                            variant="text"
+                            style={navbarDropdownStyle}
                             aria-controls={
                               infectionSafeMenuOpen ? "basic-menu" : undefined
                             }
@@ -834,11 +765,6 @@ function CarehomeMainContainer({ flags, ldClient, user, signOut }) {
                   path="/infection-safe/consequences"
                   element={<InfectionControlConsequences />}
                 />
-                <Route
-                  path="/infection-safe/contaminated-room"
-                  element={<ContaminatedRoom />}
-                />
-
                 <Route path="cases" element={<IncidentsListTab />} />
                 <Route
                   path="case/:incidentId/detail"

@@ -10,22 +10,31 @@
   height: 100%;
 }
 
+button[role="tab"] button:hover {
+  background: transparent;
+}
+
 body {
   font-family: "Open Sans";
   /*background-color: #eaf3ff !important;*/
   color: #4d6879;
 }
 
+.search-wrapper input::placeholder{
+  color: #333;
+}
+
 #frame {
   height: 100%;
+  padding-bottom: 100px;
   background-color: #f5f5f5;
   background-image: linear-gradient(131.48deg, #ffffff 0.42%, #fafafa 73.46%);
-  padding-bottom: 100px;
 }
 
 #frame.carehome {
   background-color: #EFF4FF;
   background-image: none;
+  font-family: "Open Sans";
 }
 
 #root,
