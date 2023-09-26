@@ -61,7 +61,7 @@ const formattedDate = formatDate(inputDate);
 
 const containerStyle = {
   width: "90%",
-  margin: "200px auto 0",
+  margin: "130px auto 0",
   paddingRight: "40px",
 };
 
@@ -166,11 +166,34 @@ const downloadContainerStyle = {
 };
 
 const mainContainerNavStyle = {
-  display: "inline-flex",
+  display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
   marginBottom: 20,
-  width : "100%"
+};
+
+const tableCaretDownIconStyle = {
+  color: "#919191",
+};
+
+const tableLinkStyle = {
+  mb: 1.5,
+  mt: "2px",
+  textDecoration: "underline",
+  color: "#01C1D3",
+  fontWeight: 600,
+  fontSize: 12,
+  fontFamily: "Open Sans",
+};
+
+const tableReplayStyle = {
+  mb: 1.5,
+  color: "#1763F7",
+  textDecoration: "underline",
+  marginLeft: "8px",
+  fontWeight: 600,
+  fontSize: 12,
+  fontFamily: "Open Sans",
 };
 
 export default function InfectionControlSummary() {
@@ -246,7 +269,14 @@ export default function InfectionControlSummary() {
         <Card sx={{ minWidth: 275 }}>
           <Grid
             container
-            className="table-header"
+            style={{
+              backgroundColor: "#F0F2F6",
+              padding: "20px",
+              fontSize: 12,
+              fontWeight: 600,
+              fontFamily: "Open Sans",
+              color: "#777F9E",
+            }}
           >
             <Grid item xs={1}>
               Name of case
@@ -314,21 +344,9 @@ export default function InfectionControlSummary() {
                       flexWrap: "wrap",
                     }}
                   >
-                    <KeyboardArrowDownIcon sx={{ color: "#919191" }} />
+                    <KeyboardArrowDownIcon sx={tableCaretDownIconStyle} />
                     <span>
-                      <Typography
-                        sx={{
-                          mb: 1.5,
-                          mt: "2px",
-                          textDecoration: "underline",
-                          color: "#01C1D3",
-                          fontWeight: 600,
-                          fontSize: 12,
-                          fontFamily: "Open Sans",
-                        }}
-                      >
-                        Cohorting
-                      </Typography>
+                      <Typography sx={tableLinkStyle}>Cohorting</Typography>
                     </span>
                   </div>
                 </Grid>
@@ -368,17 +386,7 @@ export default function InfectionControlSummary() {
                   >
                     8
                     <span>
-                      <Typography
-                        sx={{
-                          mb: 1.5,
-                          color: "#1763F7",
-                          textDecoration: "underline",
-                          marginLeft: "8px",
-                          fontWeight: 600,
-                          fontSize: 12,
-                          fontFamily: "Open Sans",
-                        }}
-                      >
+                      <Typography sx={tableReplayStyle}>
                         Location history
                       </Typography>
                     </span>

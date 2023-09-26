@@ -26,7 +26,6 @@ body {
 
 #frame {
   height: 100%;
-  padding-bottom: 100px;
   background-color: #f5f5f5;
   background-image: linear-gradient(131.48deg, #ffffff 0.42%, #fafafa 73.46%);
 }
@@ -35,6 +34,11 @@ body {
   background-color: #EFF4FF;
   background-image: none;
   font-family: "Open Sans";
+}
+
+#frame.carehome + .cant-log-in + .bottom-navbar {
+  margin-top: 70px;
+  display: none;
 }
 
 #root,

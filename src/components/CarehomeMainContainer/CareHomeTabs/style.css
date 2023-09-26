@@ -16,15 +16,17 @@
     background-color: #f1f1f1;
   }
   .search-button {
-      background-color : #57BEC8 ;
+      background-color: #01c1d3;
       border: none;
       color: white;
       display: inline-block;
       border-radius: 500px ;
-      padding: 10px 18px;
+      padding: 7px 34px 9px 34px;
       cursor: pointer;
-      font-size : 13px;
-  
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: underline;
+      font-family: "Open Sans";
   }
   
 
@@ -32,9 +34,10 @@
     
 
   .drop-menu-label{
-    font-size : 15px;
-    color: black;
+    font-size : 12px;
+    color: #333333;
     padding: 5px 10px 5px 10px;
+    font-weight: 600;
     display: inline-block;
   
     
@@ -64,7 +67,7 @@
   .horizontal-line {
     width: 100%;
     height: 1px;
-    background-color: lightgrey;
+    background-color: #ECEBF3;
     margin-top: 20px;
     margin-bottom: 20px;
 }
@@ -160,7 +163,6 @@ height: fit-content;
   .drop-menu{
     background-color: #EBF0FE;
     border: none;
-    color: gray;
     padding-left: 5px ;
     margin-right: 15px ;
     text-align: left;
@@ -169,13 +171,9 @@ height: fit-content;
     cursor: pointer;
     min-width:50px;
     border-left : 1px solid  black;
-    font-size: 14px;
-
-  
-    
+    color: #333;
+    font-size: 12px;
   }
-  
-
 
   .icon-container {
     display: inline-block;
@@ -295,21 +293,30 @@ border:none;
 .table-title{
   font-family: "Open Sans", sans-serif;
   color: rgb(43 , 52 ,83);
-  font-size: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
   margin-top: 15px;
-  font-weight: 600;
-  
-
+    font-size: 15px;
+    color: #283555;
+    font-weight: 600;
 }
-
-
 
 .left-card-title {
   font-family: "Open Sans", sans-serif;
-  margin-bottom: 10px;;
+  margin-bottom: 0px;
+  color: #777F9E;
+  font-size: 12px;
+  font-weight: 600;
 }
 
+.case-title {
+  margin-left: 17px;
+}
+
+.left-card-content {
+  color: #333333;
+  font-size: 12px;
+  font-weight: 500;
+}
 
 
 .flex-bar{
@@ -320,4 +327,18 @@ border:none;
 
 .flex-bar .MuiButtonBase-root{
   padding-left: 0 !important;
+}
+
+.team-safe-menu-item {
+  padding: 19px 69px 24px 35px !important;
+  border-bottom: #dddddd 1px solid !important;
+  font-size: 15px;
+  color: #283555 !important;
+  font-weight: bold !important;
+  font-family: "Open Sans" !important;
+}
+
+.team-safe-menu .MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded {
+  top : 123px !important;
+  left : 588px !important;
 }

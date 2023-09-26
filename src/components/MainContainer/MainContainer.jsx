@@ -213,41 +213,12 @@ function MainContainer({ flags, ldClient, user, signOut }) {
     alignItems: "center",
   };
 
-  const wardsMenuHidden = {
-    display: "none",
-  };
-
-  const wardsMenuHovered = {
-    display: "block",
-    position: "absolute",
-    top: "70px",
-    boxShadow: "0px 1px 6px 1px rgba(0, 0, 0, 0.2)",
-    color: "#666",
-    padding: "20px",
-    width: "165px",
-    textTransform: "uppercase",
-    fontSize: "13px",
-    minHeight: "130px",
-    backgroundColor: "#fff",
-  };
-
-  const handleClickOpen = () => {
-    setDialogOpen(true);
+  const mainContainerStyle = {
+    display: "flex",
   };
 
   const openIncidentDialog = ({ name, disease, date }) => {
     navigate("/new-incident");
-
-    // if (name) {
-    //   setIncidentInput1(name);
-    // }
-    // if (disease) {
-    //   setIncidentInput2(disease);
-    // }
-    // if (date) {
-    //   setIncidentInput3(new Date(date));
-    // }
-    // setDialogOpen(true);
   };
 
   const sidebarStyles = {
@@ -297,7 +268,7 @@ function MainContainer({ flags, ldClient, user, signOut }) {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ display: "flex" }}>
+      <Box sx={mainContainerStyle}>
         <CssBaseline />
         <AppBar
           position="fixed"

@@ -1,9 +1,13 @@
 import * as React from "react";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import "./style.css";
-import DownloadIcon from "@mui/icons-material/Download";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import {
+  KeyboardArrowDown as KeyboardArrowDownIcon,
+  ArrowForwardIos as ArrowForwardIosIcon,
+  ArrowBackIosNew as ArrowBackIosNewIcon,
+  Download as DownloadIcon,
+  South as SouthIcon,
+  North as NorthIcon,
+} from "@mui/icons-material";
 import {
   Menu,
   MenuItem,
@@ -17,16 +21,126 @@ import {
 
 const containerStyle = {
   width: "90%",
-  margin: "130px auto 0",
-  paddingRight: "40px",
+  margin: "130px auto",
+  paddingBottom: "70px",
+};
+
+const goBackStyle = {
+  color: "#8f9ab5",
+  fontSize: 14,
+  marginBottom: 1.5,
+  display: "inline-flex",
+  alignItems: "center",
+};
+
+const goBackArrowStyle = {
+  fontSize: "12px",
+  color: "#909090",
+  marginRight: "10px",
 };
 
 const consequencesTypeStyle = {
-  mb: 1.5,
+  padding: 0,
+  mb: 1.1,
   color: "#1763f7",
   fontWeight: 600,
   fontSize: 14,
   fontFamily: "Open Sans !important",
+};
+
+const typeDropdownButtonStyle = {
+  margin: 0,
+  padding: 0,
+};
+
+const downloadLinkText = {
+  marginBottom: "7px",
+  color: "#283555",
+  textDecoration: "underline",
+  fontWeight: 600,
+  display: "inline-block",
+  fontSize: 12,
+};
+
+const downloadIconStyle = {
+  color: "#283555",
+  fontSize: 16,
+  background: "transparent",
+  margin: 0,
+  padding: 0,
+};
+
+const downloadIconContainerStyle = {
+  display: "inline-flex",
+  background: "red",
+  position: "relative",
+  width: 25,
+  height: 25,
+  padding: 0,
+  justifyContent: "center",
+  alignItems: "center",
+  backgroundColor: "#eaf0ff",
+  marginTop: 2,
+  marginRight: 27,
+};
+
+const downloadContainerStyle = {
+  display: "inline-flex",
+  alignItems: "center",
+  position: "relative",
+  marginTop: "6px",
+};
+
+const titleRowStyle = {
+  display: "inline-flex",
+  justifyContent: "space-between",
+  width: "100%",
+  alignItems: "center",
+};
+
+const caseNameStyle = {
+  fontWeight: 600,
+  fontSize: 12,
+  color: "#333333",
+};
+
+const tableLinkStyle = {
+  mb: 1.5,
+  mt: "2px",
+  textDecoration: "underline",
+  color: "#01C1D3",
+  fontWeight: 600,
+  fontSize: 12,
+  fontFamily: "Open Sans",
+};
+
+const tableCaretDownIconStyle = {
+  color: "#919191",
+};
+
+const tableArrowIconStyle = {
+  color: "#919191",
+  fontSize: "11px",
+  marginLeft: "2px",
+  marginTop: "4px",
+  paddingTop: "2px",
+};
+
+const tableCaretRightIconStyle = {
+  color: "#919191",
+  fontSize: 12,
+  marginLeft: "9px",
+  marginTop: "4px",
+};
+
+const tableReplayStyle = {
+  mb: 1.5,
+  color: "#1763F7",
+  textDecoration: "underline",
+  marginLeft: "8px",
+  fontWeight: 500,
+  fontSize: 12,
+  fontFamily: "Open Sans",
 };
 
 export default function BasicCard() {
@@ -53,21 +167,41 @@ export default function BasicCard() {
     <div>
       {consequencesType === "Gastrointestinal" ? (
         <Box style={containerStyle}>
-          <Typography sx={{ mb: 1.5, color: "gray" }}>
-            <ArrowBackIosNewIcon sx={{ fontSize: "12px", color: "gray" }} />
+          <Typography sx={goBackStyle}>
+            <ArrowBackIosNewIcon sx={goBackArrowStyle} />
             Go back
           </Typography>
-          <Typography variant="h5" component="div" sx={{ fontWeight: "bold" ,  color: "rgb(43 , 52 ,83)" }}>
-            Infection Control Consequences
-          </Typography>
+          <div style={titleRowStyle}>
+            <Typography
+              variant="h5"
+              component="div"
+              sx={{ fontWeight: "bold", color: "rgb(43 , 52 ,83)" }}
+            >
+              Infection Control Consequences
+            </Typography>
+
+            <div style={downloadContainerStyle}>
+              <Typography sx={downloadLinkText}>Download report</Typography>
+              <div
+                className="icon-container"
+                style={downloadIconContainerStyle}
+              >
+                <DownloadIcon
+                  className="download-icon"
+                  style={downloadIconStyle}
+                />
+              </div>
+            </div>
+          </div>
           <div
-            className="flex-bar"
+          className="flex-bar"
           >
             <Button
               aria-controls={typeMenuOpen ? "basic-menu" : undefined}
               aria-haspopup="true"
               aria-expanded={typeMenuOpen ? "true" : undefined}
               onClick={handleTypeMenuClick}
+              style={typeDropdownButtonStyle}
             >
               <Typography id="type-menu-label" sx={consequencesTypeStyle}>
                 Type: {consequencesType}
@@ -81,7 +215,6 @@ export default function BasicCard() {
               MenuListProps={{
                 "aria-labelledby": "type-menu-label",
               }}
-
             >
               <MenuItem
                 onClick={() => {
@@ -105,31 +238,6 @@ export default function BasicCard() {
                 Gastrointestinal
               </MenuItem>
             </Menu>
-
-            <div style={{ display: "inline-block" }}>
-              <div style={{ position: "relative" }}>
-                <Typography
-                  sx={{
-                    mb: 1.5,
-                    color: "#435282",
-                    textDecoration: "underline",
-                    fontWeight: "bold",
-                    display: "inline-block",
-                  }}
-                >
-                  Download report
-                  <div
-                    className="icon-container"
-                    style={{ display: "inline-block" }}
-                  >
-                    <DownloadIcon
-                      className="download-icon"
-                      sx={{ color: "#435282" }}
-                    />
-                  </div>
-                </Typography>
-              </div>
-            </div>
           </div>
 
           <Grid container justifyContent="center" spacing={5}>
@@ -188,55 +296,39 @@ export default function BasicCard() {
           <br></br>
           <Grid container justifyContent="center" spacing={5}>
             <Grid item xs={12} sm={3}>
-              <h5  className="left-card-title table-title">
-                Case
-              </h5>
+              <h5 className="table-title case-title">Case</h5>
               <br />
               <Card sx={{ minWidth: 275 }}>
                 <CardContent>
-                  <div
-                    className="left-card-title"
-                  >
-                    Name of case
-                  </div>
-                  <Typography variant="body2" sx={{ fontWeight: "bold" }}>
+                  <div className="left-card-title">Name of Case</div>
+                  <Typography variant="body2" sx={caseNameStyle}>
                     Elsa peter
                   </Typography>
 
                   <div class="horizontal-line"></div>
 
-                  <div
-                    className="left-card-title"
-                  >
-                    Status
+                  <div className="left-card-title">Status</div>
+                  <div variant="body2" className="left-card-content">
+                    staff
                   </div>
-                  <div variant="body2" className="left-card-content" >staff</div>
 
                   <div class="horizontal-line"></div>
 
-                  <div
-                    className="left-card-title"
-                  >
-                    Time and date of onset
+                  <div className="left-card-title">Time and date of onset</div>
+                  <div variant="body2" className="left-card-content">
+                    Jun 30, 2021 10:00 AM
                   </div>
-                  <div variant="body2" className="left-card-content" >Jun 30, 2021 10:00 AM</div>
 
                   <div class="horizontal-line"></div>
 
-                  <div
-                    className="left-card-title"
-                  >
-                    Infection type
+                  <div className="left-card-title">Infection type</div>
+                  <div variant="body2" className="left-card-content">
+                    Gastrointestinal
                   </div>
-                  <div variant="body2" className="left-card-content" >Gastrointestinal</div>
 
                   <div class="horizontal-line"></div>
 
-                  <div
-                    className="left-card-title"
-                  >
-                    Action for case
-                  </div>
+                  <div className="left-card-title">Action for case</div>
                   <div
                     style={{
                       display: "flex",
@@ -244,65 +336,45 @@ export default function BasicCard() {
                       flexWrap: "wrap",
                     }}
                   >
-                    <KeyboardArrowDownIcon />
+                    <KeyboardArrowDownIcon style={tableCaretDownIconStyle} />
                     <span>
-                      <Typography
-                        sx={{
-                          mb: 1.5,
-                          color: "#57BEC8",
-                          textDecoration: "underline",
-                          fontWeight: "bold",
-                          marginLeft: "10px",
-                        }}
-                      >
-                        Cohorting
-                      </Typography>
+                      <Typography sx={tableLinkStyle}>Cohorting</Typography>
                     </span>
                   </div>
                   <div class="horizontal-line"></div>
 
-                  <div
-                    className="left-card-title"
-                  >
-                    No of contaminated room
-                  </div>
+                  <div className="left-card-title">No of contaminated room</div>
 
-                  <div className="left-card-content" >4</div>
+                  <div className="left-card-content">4</div>
 
                   <div class="horizontal-line"></div>
 
-                  <div
-                    className="left-card-title"
-                  >
-                    No of exposed contacts
-                  </div>
+                  <div className="left-card-title">No of exposed contacts</div>
 
-                  <div className="left-card-content" >8</div>
-
+                  <div className="left-card-content">8</div>
                 </CardContent>
               </Card>
             </Grid>
             <Grid item xs={12} sm={9}>
-              <h6  className="table-title">
-                Contaminated rooms
-              </h6>
+              <h6 className="table-title">Contaminated rooms</h6>
               <br />
               <Card sx={{ minWidth: 275 }}>
-                <Grid
-                  container
-                  className="table-header"
-                >
+                <Grid container className="table-header">
                   <Grid item xs={3}>
                     List of contaminated rooms
+                    <SouthIcon style={tableArrowIconStyle} />
                   </Grid>
                   <Grid item xs={2}>
                     Type of room
+                    <SouthIcon style={tableArrowIconStyle} />
                   </Grid>
                   <Grid item xs={2}>
                     Time in room
+                    <NorthIcon style={tableArrowIconStyle} />
                   </Grid>
                   <Grid item xs={3}>
                     Action for room
+                    <NorthIcon style={tableArrowIconStyle} />
                   </Grid>
                   <Grid item xs={2}></Grid>
                 </Grid>
@@ -312,18 +384,19 @@ export default function BasicCard() {
                     <div>
                       <Grid container style={{ padding: "20px" }}>
                         <Grid item xs={3}>
-                          <Typography
-                            variant="body2"
-                            sx={{ fontWeight: "bold" }}
-                          >
+                          <Typography variant="body2" sx={caseNameStyle}>
                             Room 201
                           </Typography>
                         </Grid>
                         <Grid item xs={2}>
-                          <div className="table-content">Office</div>
+                          <div className="table-content left-card-content">
+                            Office
+                          </div>
                         </Grid>
                         <Grid item xs={2}>
-                          <div className="table-content">10 min</div>
+                          <div className="table-content left-card-content">
+                            10 min
+                          </div>
                         </Grid>
                         <Grid item xs={3}>
                           <div
@@ -333,18 +406,12 @@ export default function BasicCard() {
                               flexWrap: "wrap",
                             }}
                           >
-                            <KeyboardArrowDownIcon />
+                            <KeyboardArrowDownIcon
+                              style={tableCaretDownIconStyle}
+                            />
                             <span>
-                              <Typography
-                                sx={{
-                                  mb: 1.5,
-                                  color: "#57BEC8",
-                                  textDecoration: "underline",
-                                  fontWeight: "bold",
-                                  marginLeft: "20px",
-                                }}
-                              >
-                                Clean
+                              <Typography sx={tableLinkStyle}>
+                                Cohorting
                               </Typography>
                             </span>
                           </div>
@@ -358,17 +425,13 @@ export default function BasicCard() {
                             }}
                           >
                             <span>
-                              <Typography
-                                sx={{
-                                  mb: 1.5,
-                                  color: "blue",
-                                  textDecoration: "underline",
-                                }}
-                              >
-                                View replay
+                              <Typography sx={tableReplayStyle}>
+                                View replay on map
                               </Typography>
                             </span>
-                            <ArrowForwardIosIcon sx={{ color: "blue" }} />
+                            <ArrowForwardIosIcon
+                              sx={tableCaretRightIconStyle}
+                            />
                           </div>
                         </Grid>
                       </Grid>
@@ -379,26 +442,25 @@ export default function BasicCard() {
               </Card>
               <br />
               <br />
-              <h5  className="table-title" >
-                Exposed people
-              </h5>
+              <h5 className="table-title">Exposed people</h5>
               <br />
               <Card sx={{ minWidth: 275 }}>
-                <Grid
-                  container
-                  className="table-header"
-                >
+                <Grid container className="table-header">
                   <Grid item xs={2.5}>
                     List of exposed people
+                    <SouthIcon style={tableArrowIconStyle} />
                   </Grid>
                   <Grid item xs={3}>
                     Type of contaminated room
+                    <SouthIcon style={tableArrowIconStyle} />
                   </Grid>
                   <Grid item xs={1.5}>
                     Time in room
+                    <NorthIcon style={tableArrowIconStyle} />
                   </Grid>
                   <Grid item xs={3}>
                     Action for exposed contact
+                    <NorthIcon style={tableArrowIconStyle} />
                   </Grid>
                   <Grid item xs={2}></Grid>
                 </Grid>
@@ -408,18 +470,19 @@ export default function BasicCard() {
                     <div>
                       <Grid container style={{ padding: "20px" }}>
                         <Grid item xs={2.5}>
-                          <Typography
-                            variant="body2"
-                            sx={{ fontWeight: "bold" }}
-                          >
+                          <Typography variant="body2" sx={caseNameStyle}>
                             Room 201
                           </Typography>
                         </Grid>
                         <Grid item xs={3}>
-                        <div className="table-content">Bathroom</div>
+                          <div className="table-content left-card-content ">
+                            Bathroom
+                          </div>
                         </Grid>
                         <Grid item xs={1.5}>
-                        <div className="table-content">10 min</div>
+                          <div className="table-content left-card-content">
+                            10 min
+                          </div>
                         </Grid>
                         <Grid item xs={3}>
                           <div
@@ -429,17 +492,11 @@ export default function BasicCard() {
                               flexWrap: "wrap",
                             }}
                           >
-                            <KeyboardArrowDownIcon />
+                            <KeyboardArrowDownIcon
+                              style={tableCaretDownIconStyle}
+                            />
                             <span>
-                              <Typography
-                                sx={{
-                                  mb: 1.5,
-                                  color: "#57BEC8",
-                                  textDecoration: "underline",
-                                  fontWeight: "bold",
-                                  marginLeft: "20px",
-                                }}
-                              >
+                              <Typography sx={tableLinkStyle}>
                                 Isolate
                               </Typography>
                             </span>
@@ -454,17 +511,13 @@ export default function BasicCard() {
                             }}
                           >
                             <span>
-                              <Typography
-                                sx={{
-                                  mb: 1.5,
-                                  color: "blue",
-                                  textDecoration: "underline",
-                                }}
-                              >
-                                View replay
+                              <Typography sx={tableReplayStyle}>
+                                View replay on map
                               </Typography>
                             </span>
-                            <ArrowForwardIosIcon sx={{ color: "blue" }} />
+                            <ArrowForwardIosIcon
+                              sx={tableCaretRightIconStyle}
+                            />
                           </div>
                         </Grid>
                       </Grid>
@@ -478,8 +531,8 @@ export default function BasicCard() {
         </Box>
       ) : (
         <Box style={containerStyle}>
-          <Typography sx={{ mb: 1.5, color: "gray" }}>
-            <ArrowBackIosNewIcon sx={{ fontSize: "12px", color: "gray" }} />
+          <Typography sx={goBackStyle}>
+            <ArrowBackIosNewIcon sx={goBackArrowStyle} />
             Go back
           </Typography>
           <Typography variant="h5" component="div" sx={{ fontWeight: "bold" }}>
@@ -551,27 +604,17 @@ export default function BasicCard() {
               <button className="search-button"> Search </button>
             </div>
             <div style={{ display: "inline-block" }}>
-              <div style={{ position: "relative" }}>
-                <Typography
-                  sx={{
-                    mb: 1.5,
-                    color: "#435282",
-                    textDecoration: "underline",
-                    fontWeight: "bold",
-                    display: "inline-block",
-                  }}
+              <div style={downloadContainerStyle}>
+                <Typography sx={downloadLinkText}>Download report</Typography>
+                <div
+                  className="icon-container"
+                  style={downloadIconContainerStyle}
                 >
-                  Download report
-                  <div
-                    className="icon-container"
-                    style={{ display: "inline-block" }}
-                  >
-                    <DownloadIcon
-                      className="download-icon"
-                      sx={{ color: "#435282" }}
-                    />
-                  </div>
-                </Typography>
+                  <DownloadIcon
+                    className="download-icon"
+                    style={downloadIconStyle}
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -579,47 +622,28 @@ export default function BasicCard() {
           <br></br>
           <Grid container justifyContent="center" spacing={5}>
             <Grid item xs={12} sm={3}>
-              <h5  className="left-card-title table-title">
-                Case
-              </h5>
+              <h6 className="table-title case-title">Case</h6>
               <br />
-
               <Card sx={{ minWidth: 275 }}>
                 <CardContent>
-                  <div
-                    className="left-card-title"
-                  >
-                    Name of case
-                  </div>
-                  <Typography variant="body2" sx={{ fontWeight: "bold" }}>
+                  <div className="left-card-title">Name of case</div>
+                  <Typography variant="body2" sx={caseNameStyle}>
                     Elsa peter
                   </Typography>
 
                   <div class="horizontal-line"></div>
 
-                  <div
-                    className="left-card-title"
-                  >
-                    Status
-                  </div>
-                  <div variant="body2" className="left-card-content" >staff</div>
+                  <div className="left-card-title">Status</div>
+                  <Typography variant="body2">staff</Typography>
 
                   <div class="horizontal-line"></div>
 
-                  <div
-                    className="left-card-title"
-                  >
-                    Time and date of onset
-                  </div>
-                  <div variant="body2" className="left-card-content" >Jun 30, 2021 10:00 AM</div>
+                  <div className="left-card-title">Time and date of onset</div>
+                  <Typography variant="body2">Jun 30, 2021 10:00 AM</Typography>
 
                   <div class="horizontal-line"></div>
 
-                  <div
-                    className="left-card-title"
-                  >
-                    Action for case
-                  </div>
+                  <div className="left-card-title">Action for case</div>
                   <div
                     style={{
                       display: "flex",
@@ -627,58 +651,39 @@ export default function BasicCard() {
                       flexWrap: "wrap",
                     }}
                   >
-                    <KeyboardArrowDownIcon />
+                    <KeyboardArrowDownIcon style={tableCaretDownIconStyle} />
                     <span>
-                      <Typography
-                        sx={{
-                          mb: 1.5,
-                          color: "#57BEC8",
-                          textDecoration: "underline",
-                          fontWeight: "bold",
-                          marginLeft: "10px",
-                        }}
-                      >
-                        Cohorting
-                      </Typography>
+                      <Typography sx={tableLinkStyle}>Cohorting</Typography>
                     </span>
                   </div>
-                  
                   <div class="horizontal-line"></div>
 
-                  <div
-                    className="left-card-title"
-                  >
-                    No of exposed contacts
-                  </div>
-
-                  <div className="left-card-content" >8</div>
-
+                  <div className="left-card-title">No of exposed contacts</div>
+                  <Typography variant="body2">8</Typography>
                 </CardContent>
               </Card>
-
             </Grid>
             <Grid item xs={12} sm={9}>
-              <h6  className="table-title">
-                List of contacts
-              </h6>
+              <h5 className="table-title">List of contacts</h5>
+
               <br />
               <Card sx={{ minWidth: 275 }}>
-                <Grid
-                  container
-                  className="table-header"
-
-                >
+                <Grid container className="table-header">
                   <Grid item xs={2}>
                     List of all contacts
+                    <SouthIcon style={tableArrowIconStyle} />
                   </Grid>
-                  <Grid item xs={1}>
+                  <Grid item xs={2}>
                     Status
+                    <SouthIcon style={tableArrowIconStyle} />
                   </Grid>
-                  <Grid item xs={2.5}>
+                  <Grid item xs={2}>
                     Duration of contact
+                    <NorthIcon style={tableArrowIconStyle} />
                   </Grid>
-                  <Grid item xs={2.5}>
+                  <Grid item xs={2}>
                     Proximity of contact
+                    <NorthIcon style={tableArrowIconStyle} />
                   </Grid>
                   <Grid item xs={2}>
                     Action for contact
@@ -691,21 +696,24 @@ export default function BasicCard() {
                     <div>
                       <Grid container style={{ padding: "20px" }}>
                         <Grid item xs={2}>
-                          <Typography
-                            variant="body2"
-                            sx={{ fontWeight: "bold" }}
-                          >
+                          <Typography variant="body2" sx={caseNameStyle}>
                             Elsa peter
                           </Typography>
                         </Grid>
-                        <Grid item xs={1}>
-                          <Typography variant="body2">staff</Typography>
+                        <Grid item xs={2}>
+                          <Typography variant="body2 left-card-content">
+                            staff
+                          </Typography>
                         </Grid>
-                        <Grid item xs={2.5}>
-                          <Typography variant="body2">5 min</Typography>
+                        <Grid item xs={2}>
+                          <Typography variant="body2 left-card-content">
+                            5 min
+                          </Typography>
                         </Grid>
-                        <Grid item xs={2.5}>
-                          <Typography variant="body2">3 m</Typography>
+                        <Grid item xs={2}>
+                          <Typography variant="body2 left-card-content">
+                            3 m
+                          </Typography>
                         </Grid>
                         <Grid item xs={2}>
                           <div
@@ -715,17 +723,11 @@ export default function BasicCard() {
                               flexWrap: "wrap",
                             }}
                           >
-                            <KeyboardArrowDownIcon />
+                            <KeyboardArrowDownIcon
+                              style={tableCaretDownIconStyle}
+                            />
                             <span>
-                              <Typography
-                                sx={{
-                                  mb: 1.5,
-                                  color: "#57BEC8",
-                                  textDecoration: "underline",
-                                  fontWeight: "bold",
-                                  marginLeft: "20px",
-                                }}
-                              >
+                              <Typography sx={tableLinkStyle}>
                                 Isolate
                               </Typography>
                             </span>
@@ -740,17 +742,13 @@ export default function BasicCard() {
                             }}
                           >
                             <span>
-                              <Typography
-                                sx={{
-                                  mb: 1.5,
-                                  color: "blue",
-                                  textDecoration: "underline",
-                                }}
-                              >
-                                View replay
+                              <Typography sx={tableReplayStyle}>
+                                View replay on map
                               </Typography>
                             </span>
-                            <ArrowForwardIosIcon sx={{ color: "blue" }} />
+                            <ArrowForwardIosIcon
+                              sx={tableCaretRightIconStyle}
+                            />
                           </div>
                         </Grid>
                       </Grid>

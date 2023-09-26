@@ -40,6 +40,10 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CaseDetail from "../CaseDetail/CaseDetail";
 import MapTab from "../MapTab/MapTab";
 import { withLDConsumer, useFlags } from "launchdarkly-react-client-sdk";
+import AddNewCase from "./CareHomeTabs/AddNewCase";
+import TeamSafeSummary from "./CareHomeTabs/TeamSafeMap/TeamSafeMap";
+import LocateTeamMember from "./CareHomeTabs/TeamSafeMap/LocateTeamMember";
+import "./CareHomeTabs/style.css";
 
 function CarehomeMainContainer({ flags, ldClient, user, signOut }) {
   // const flags = useFlags();
@@ -170,6 +174,17 @@ function CarehomeMainContainer({ flags, ldClient, user, signOut }) {
   const [incidentInput3, setIncidentInput3] = useState(new Date());
   const [incidentInput4, setIncidentInput4] = useState("");
   const [wardsHovered, setWardsHovered] = useState(false);
+
+
+  const teamSafeMenuItems = [
+    {label : "Team Safe Summary" , url : "/team-safe/team-safe-summary"} ,
+    {label : "Locate Team Member" , url : "/team-safe/locate-team-member"} ,
+    {label : "Investigate Event" , url : "/team-safe/investigate-event"} ,
+    {label : "Secure door Monitoring" , url : "/team-safe/secure-door-monitoring"}, 
+    {label : "Lone Working Insights" , url : "/team-safe/lone-working-insights"} ,
+
+
+  ];
 
   const theme = createTheme({
     palette: {
@@ -686,13 +701,72 @@ function CarehomeMainContainer({ flags, ldClient, user, signOut }) {
                       value="/team-safe"
                       label={
                         <>
-                          <span id="team-safe-label">Team Safe</span>
-                          <DownIcon
-                            style={{
-                              ...downCaretStyle,
-                              ...lowerNavDownCaretStyle,
+                          <Button
+                            variant="text"
+                            style={navbarDropdownStyle}
+                            aria-controls={
+                              teamSafeMenuOpen ? "basic-menu" : undefined
+                            }
+                            aria-haspopup="true"
+                            aria-expanded={
+                              teamSafeMenuOpen ? "true" : undefined
+                            }
+                            onClick={handleTeamSafeMenuClick}
+                            
+                          >
+                            <span id="infection-safe-label">
+                              Team Safe
+                            </span>
+                            <DownIcon
+                              style={{
+                                ...downCaretStyle,
+                                ...lowerNavDownCaretStyle,
+                              }}
+                            />{" "}
+                          </Button>
+                          <Menu
+                            id="team-safe-menu"
+                            anchorEl={teamSafeMenuAnchorEl}
+                            open={teamSafeMenuOpen}
+                            onClose={handleTeamSafeMenuClose}
+                            MenuListProps={{
+                              "aria-labelledby": "infection-safe-label",
                             }}
-                          />
+                            sx = {{
+                              "& .MuiMenu-list" : {
+                                paddingTop : 0,
+                                paddingBottom : 0 ,
+                              } , 
+                              "& .MuiPaper-root-MuiPopover-paper-MuiMenu-paper" : {
+                                top :"123px",
+                                left : "578px",
+                                backgroundColor : "red !important"
+                              }
+                            }}
+                            className="team-safe-menu"
+                          >
+
+                            {
+                              teamSafeMenuItems.map((item) => { return (
+                                  <MenuItem
+                                  onClick={(event) => {
+                                    event.stopPropagation();
+                                    navigate(item.url);
+                                    handleTeamSafeMenuClose();
+                                  }}
+                                  className="team-safe-menu-item"
+                                  >
+                                    {item.label}
+                                  </MenuItem> )
+                                }
+                              )
+                            }
+                          
+                          
+                          
+                           
+                          </Menu>
+                          
                         </>
                       }
                       iconPosition="start"
@@ -772,6 +846,9 @@ function CarehomeMainContainer({ flags, ldClient, user, signOut }) {
                 />
                 <Route path="map" element={<LiveMap />} />
                 <Route path="new-incident" element={<NewIncident />} />
+                <Route path="add-new-case" element={<AddNewCase />} />
+                <Route path="/team-safe/team-safe-summary" element={<TeamSafeSummary/>} />
+                <Route path="/team-safe/locate-team-member" element={<LocateTeamMember/>} />
               </Routes>
             </Box>
           </Grid>
