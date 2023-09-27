@@ -1,0 +1,38 @@
+{
+  "expstage": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-webapp-expstage-144519-authRole",
+      "UnauthRoleArn": "arn:aws:iam::044675806302:role/amplify-webapp-expstage-144519-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::044675806302:role/amplify-webapp-expstage-144519-authRole",
+      "Region": "eu-west-2",
+      "DeploymentBucketName": "amplify-webapp-expstage-144519-deployment",
+      "UnauthRoleName": "amplify-webapp-expstage-144519-unauthRole",
+      "StackName": "amplify-webapp-expstage-144519",
+      "StackId": "arn:aws:cloudformation:eu-west-2:044675806302:stack/amplify-webapp-expstage-144519/7ad060e0-5d44-11ee-9a02-0696f2347020",
+      "AmplifyAppId": "d336wtk9h2gows"
+    },
+    "categories": {
+      "auth": {
+        "webapp": {
+          "userPoolId": "eu-west-2_Wm5DX2crR",
+          "userPoolName": "ProxximosAppUserPool",
+          "webClientId": "7qk9ev48rii6ad4d4p6j06kapn",
+          "nativeClientId": "7qk9ev48rii6ad4d4p6j06kapn",
+          "identityPoolId": "eu-west-2:12f7c1de-68cb-4730-929a-9c819c62f2d7",
+          "identityPoolName": "AmplifyCDKIdentityPool_SnsSKyIpLnsp",
+          "allowUnauthenticatedIdentities": true,
+          "authRoleArn": "arn:aws:iam::044675806302:role/ProxximosCdkStack-CognitoDefaultAuthenticatedRoleC-IUIZ21QQFXVZ",
+          "authRoleName": "ProxximosCdkStack-CognitoDefaultAuthenticatedRoleC-IUIZ21QQFXVZ",
+          "unauthRoleArn": "arn:aws:iam::044675806302:role/ProxximosCdkStack-CognitoDefaultUnauthenticatedRol-13ZWWD61ICUYP",
+          "unauthRoleName": "ProxximosCdkStack-CognitoDefaultUnauthenticatedRol-13ZWWD61ICUYP"
+        }
+      },
+      "storage": {
+        "webapp17509f72": {
+          "bucketName": "proxximosbucket",
+          "region": "eu-west-2"
+        }
+      }
+    }
+  }
+}

@@ -33,6 +33,18 @@ const goBackStyle = {
   alignItems: "center",
 };
 
+const rightCardStyle = {
+  borderRadius: "8px",
+  boxShadow: "none",
+  minWidth: "275px",
+};
+
+const leftCardStyle = {
+  minWidth: 275,
+  borderRadius: 8,
+  boxShadow: "none",
+};
+
 const goBackArrowStyle = {
   fontSize: "12px",
   color: "#909090",
@@ -53,13 +65,27 @@ const typeDropdownButtonStyle = {
   padding: 0,
 };
 
+const contaminatedRoomPillStyle = {
+  display: "inline-flex",
+};
+
+const exposedPersonPillStyle = {
+  display: "inline-flex",
+};
+
 const downloadLinkText = {
-  marginBottom: "7px",
+  marginBottom: 0,
   color: "#283555",
   textDecoration: "underline",
   fontWeight: 600,
   display: "inline-block",
   fontSize: 12,
+};
+
+const pillGroupItemStyle = {
+  display: "inline-flex",
+  flexDirection: "column",
+  marginRight: "30px",
 };
 
 const downloadIconStyle = {
@@ -68,6 +94,10 @@ const downloadIconStyle = {
   background: "transparent",
   margin: 0,
   padding: 0,
+};
+
+const leftButtonGroupStyle = {
+  display: "inline-flex",
 };
 
 const downloadIconContainerStyle = {
@@ -80,8 +110,8 @@ const downloadIconContainerStyle = {
   justifyContent: "center",
   alignItems: "center",
   backgroundColor: "#eaf0ff",
-  marginTop: 2,
-  marginRight: 27,
+  marginTop: "10px",
+  marginRight: "27px",
 };
 
 const downloadContainerStyle = {
@@ -107,7 +137,6 @@ const caseNameStyle = {
 const tableLinkStyle = {
   mb: 1.5,
   mt: "2px",
-  textDecoration: "underline",
   color: "#01C1D3",
   fontWeight: 600,
   fontSize: 12,
@@ -116,6 +145,10 @@ const tableLinkStyle = {
 
 const tableCaretDownIconStyle = {
   color: "#919191",
+};
+
+const pillGroupStyle = {
+  display: "inline-flex",
 };
 
 const tableArrowIconStyle = {
@@ -141,6 +174,10 @@ const tableReplayStyle = {
   fontWeight: 500,
   fontSize: 12,
   fontFamily: "Open Sans",
+};
+
+const definitionStyle = {
+  display: "inline-flex",
 };
 
 export default function BasicCard() {
@@ -181,7 +218,7 @@ export default function BasicCard() {
             </Typography>
 
             <div style={downloadContainerStyle}>
-              <Typography sx={downloadLinkText}>Download report</Typography>
+              <Typography sx={downloadLinkText}>Download Report</Typography>
               <div
                 className="icon-container"
                 style={downloadIconContainerStyle}
@@ -194,7 +231,11 @@ export default function BasicCard() {
             </div>
           </div>
           <div
-          className="flex-bar"
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginTop: "20px",
+            }}
           >
             <Button
               aria-controls={typeMenuOpen ? "basic-menu" : undefined}
@@ -241,56 +282,68 @@ export default function BasicCard() {
           </div>
 
           <Grid container justifyContent="center" spacing={5}>
-            <Grid item xs={6}>
-              <Typography sx={consequencesTypeStyle}>
-                Definition of Contaminated Room:
-              </Typography>
-              <div className="pill">
-                <div className="drop-menu-label" for="cars1">
-                  Time in room
+            <Grid item xs={12}>
+              <div style={pillGroupStyle}>
+                <div style={pillGroupItemStyle}>
+                  <Typography
+                    sx={{ ...consequencesTypeStyle, ...definitionStyle }}
+                  >
+                    Definition of Contaminated Room:
+                  </Typography>
+                  <div className="pill">
+                    <div className="drop-menu-label" for="cars1">
+                      Time In Room
+                    </div>
+                    <select className="drop-menu" name="cars1" id="cars">
+                      <option value="volvo">1 minute</option>
+                      <option value="saab">5 minutes</option>
+                      <option value="opel">15 minutes</option>
+                      <option value="audi">1 hour</option>
+                    </select>
+                    <div className="drop-menu-label" for="cars2">
+                      Type Of Room
+                    </div>
+                    <select className="drop-menu" name="cars2" id="cars">
+                      <option value="volvo">Any</option>
+                      <option value="saab">Bathroom</option>
+                      <option value="opel">Bedroom</option>
+                    </select>
+                    <button className="search-button"> Search </button>
+                  </div>
                 </div>
-                <select className="drop-menu" name="cars1" id="cars">
-                  <option value="volvo">1 m</option>
-                  <option value="saab">5 m</option>
-                  <option value="opel">15 m</option>
-                  <option value="audi">1 h</option>
-                </select>
-                <div className="drop-menu-label" for="cars2">
-                  Type of room
+
+                <div style={pillGroupItemStyle}>
+                  <Typography
+                    sx={{ ...consequencesTypeStyle, ...definitionStyle }}
+                  >
+                    Definition of Exposed Person:
+                  </Typography>
+                  <div className="pill">
+                    <div className="drop-menu-label" for="cars1">
+                      Time In Contaminated Room
+                    </div>
+                    <select className="drop-menu" name="cars1" id="cars">
+                      <option value="volvo">1 minute</option>
+                      <option value="saab">5 minutes</option>
+                      <option value="opel">15 minutes</option>
+                      <option value="audi">1 hour</option>
+                    </select>
+                    <div className="drop-menu-label" for="cars2">
+                      Type of Room
+                    </div>
+                    <select className="drop-menu" name="cars2" id="cars">
+                      <option value="volvo">Any</option>
+                      <option value="saab">Bathroom</option>
+                      <option value="opel">Bedroom</option>
+                    </select>
+                    <button className="search-button"> Search </button>
+                  </div>
                 </div>
-                <select className="drop-menu" name="cars2" id="cars">
-                  <option value="volvo">Office</option>
-                  <option value="saab">Bathroom</option>
-                  <option value="opel">Bedroom</option>
-                </select>
-                <button className="search-button"> Search </button>
               </div>
             </Grid>
-            <Grid item xs={6}>
-              <Typography sx={consequencesTypeStyle}>
-                Definition of Exposed Person:
-              </Typography>
-              <div className="pill">
-                <div className="drop-menu-label" for="cars1">
-                  Time in contaminated room
-                </div>
-                <select className="drop-menu" name="cars1" id="cars">
-                  <option value="volvo">1 m</option>
-                  <option value="saab">5 m</option>
-                  <option value="opel">15 m</option>
-                  <option value="audi">1 h</option>
-                </select>
-                <div className="drop-menu-label" for="cars2">
-                  Type of room
-                </div>
-                <select className="drop-menu" name="cars2" id="cars">
-                  <option value="volvo">Office</option>
-                  <option value="saab">Bathroom</option>
-                  <option value="opel">Bedroom</option>
-                </select>
-                <button className="search-button"> Search </button>
-              </div>
-            </Grid>
+            {/* <Grid item xs={6}>
+              
+            </Grid> */}
           </Grid>
 
           <br></br>
@@ -298,18 +351,18 @@ export default function BasicCard() {
             <Grid item xs={12} sm={3}>
               <h5 className="table-title case-title">Case</h5>
               <br />
-              <Card sx={{ minWidth: 275 }}>
+              <Card style={leftCardStyle}>
                 <CardContent>
                   <div className="left-card-title">Name of Case</div>
                   <Typography variant="body2" sx={caseNameStyle}>
-                    Elsa peter
+                    Elsa Peter
                   </Typography>
 
                   <div class="horizontal-line"></div>
 
                   <div className="left-card-title">Status</div>
                   <div variant="body2" className="left-card-content">
-                    staff
+                    Staff
                   </div>
 
                   <div class="horizontal-line"></div>
@@ -356,24 +409,24 @@ export default function BasicCard() {
               </Card>
             </Grid>
             <Grid item xs={12} sm={9}>
-              <h6 className="table-title">Contaminated rooms</h6>
+              <h6 className="table-title">Contaminated Rooms</h6>
               <br />
-              <Card sx={{ minWidth: 275 }}>
+              <Card sx={rightCardStyle}>
                 <Grid container className="table-header">
                   <Grid item xs={3}>
                     List of contaminated rooms
                     <SouthIcon style={tableArrowIconStyle} />
                   </Grid>
                   <Grid item xs={2}>
-                    Type of room
+                    Type of Room
                     <SouthIcon style={tableArrowIconStyle} />
                   </Grid>
                   <Grid item xs={2}>
-                    Time in room
+                    Time in Room
                     <NorthIcon style={tableArrowIconStyle} />
                   </Grid>
                   <Grid item xs={3}>
-                    Action for room
+                    Action for Room
                     <NorthIcon style={tableArrowIconStyle} />
                   </Grid>
                   <Grid item xs={2}></Grid>
@@ -395,7 +448,7 @@ export default function BasicCard() {
                         </Grid>
                         <Grid item xs={2}>
                           <div className="table-content left-card-content">
-                            10 min
+                            10 mins
                           </div>
                         </Grid>
                         <Grid item xs={3}>
@@ -442,24 +495,24 @@ export default function BasicCard() {
               </Card>
               <br />
               <br />
-              <h5 className="table-title">Exposed people</h5>
+              <h5 className="table-title">Exposed People</h5>
               <br />
-              <Card sx={{ minWidth: 275 }}>
+              <Card sx={rightCardStyle}>
                 <Grid container className="table-header">
                   <Grid item xs={2.5}>
                     List of exposed people
                     <SouthIcon style={tableArrowIconStyle} />
                   </Grid>
                   <Grid item xs={3}>
-                    Type of contaminated room
+                    Type of Contaminated Room
                     <SouthIcon style={tableArrowIconStyle} />
                   </Grid>
                   <Grid item xs={1.5}>
-                    Time in room
+                    Time in Room
                     <NorthIcon style={tableArrowIconStyle} />
                   </Grid>
                   <Grid item xs={3}>
-                    Action for exposed contact
+                    Action for Exposed contact
                     <NorthIcon style={tableArrowIconStyle} />
                   </Grid>
                   <Grid item xs={2}></Grid>
@@ -481,7 +534,7 @@ export default function BasicCard() {
                         </Grid>
                         <Grid item xs={1.5}>
                           <div className="table-content left-card-content">
-                            10 min
+                            10 mins
                           </div>
                         </Grid>
                         <Grid item xs={3}>
@@ -539,73 +592,79 @@ export default function BasicCard() {
             Infection Control Consequences
           </Typography>
           <div
-            className="flex-bar"
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginTop: "20px",
+            }}
           >
-            <Button
-              aria-controls={typeMenuOpen ? "basic-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={typeMenuOpen ? "true" : undefined}
-              onClick={handleTypeMenuClick}
-            >
-              <Typography id="type-menu-label" sx={consequencesTypeStyle}>
-                Type: {consequencesType} | Definition Of Exposed Contact:
-              </Typography>
-            </Button>
-            <Menu
-              id="type-menu"
-              anchorEl={typeMenuAnchorEl}
-              open={typeMenuOpen}
-              onClose={handleTypeMenuClose}
-              MenuListProps={{
-                "aria-labelledby": "type-menu-label",
-              }}
-            >
-              <MenuItem
-                onClick={() => {
-                  handleTypeMenuSelect("Skin");
+            <div style={leftButtonGroupStyle}>
+              <Button
+                aria-controls={typeMenuOpen ? "basic-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={typeMenuOpen ? "true" : undefined}
+                onClick={handleTypeMenuClick}
+              >
+                <Typography id="type-menu-label" sx={consequencesTypeStyle}>
+                  Type: {consequencesType} | Definition Of Exposed Contact:
+                </Typography>
+              </Button>
+              <Menu
+                id="type-menu"
+                anchorEl={typeMenuAnchorEl}
+                open={typeMenuOpen}
+                onClose={handleTypeMenuClose}
+                MenuListProps={{
+                  "aria-labelledby": "type-menu-label",
                 }}
               >
-                Skin
-              </MenuItem>
-              <MenuItem
-                onClick={() => {
-                  handleTypeMenuSelect("Respiratory");
-                }}
-              >
-                Respiratory
-              </MenuItem>
-              <MenuItem
-                onClick={() => {
-                  handleTypeMenuSelect("Gastrointestinal");
-                }}
-              >
-                Gastrointestinal
-              </MenuItem>
-            </Menu>
-            <div className="pill">
-              <div className="drop-menu-label" for="cars1">
-                Proximity
+                <MenuItem
+                  onClick={() => {
+                    handleTypeMenuSelect("Skin");
+                  }}
+                >
+                  Skin
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    handleTypeMenuSelect("Respiratory");
+                  }}
+                >
+                  Respiratory
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    handleTypeMenuSelect("Gastrointestinal");
+                  }}
+                >
+                  Gastrointestinal
+                </MenuItem>
+              </Menu>
+              <div className="pill">
+                <div className="drop-menu-label" for="cars1">
+                  Proximity
+                </div>
+                <select className="drop-menu" name="cars1" id="cars">
+                  <option value="volvo">1 meters</option>
+                  <option value="saab">10 meters</option>
+                  <option value="opel">20 meters</option>
+                  <option value="audi">50 meters</option>
+                </select>
+                <div className="drop-menu-label" for="cars2">
+                  Duration of Contact
+                </div>
+                <select className="drop-menu" name="cars2" id="cars">
+                  <option value="volvo">1 minute</option>
+                  <option value="saab">5 minutes</option>
+                  <option value="opel">15 minutes</option>
+                  <option value="audi">1 hour</option>
+                </select>
+                <button className="search-button"> Search </button>
               </div>
-              <select className="drop-menu" name="cars1" id="cars">
-                <option value="volvo">1 m</option>
-                <option value="saab">10 m</option>
-                <option value="opel">20 m</option>
-                <option value="audi">50 m</option>
-              </select>
-              <div className="drop-menu-label" for="cars2">
-                Duration of contact
-              </div>
-              <select className="drop-menu" name="cars2" id="cars">
-                <option value="volvo">1 min</option>
-                <option value="saab">5 min</option>
-                <option value="opel">15 min</option>
-                <option value="audi">1 h</option>
-              </select>
-              <button className="search-button"> Search </button>
             </div>
             <div style={{ display: "inline-block" }}>
               <div style={downloadContainerStyle}>
-                <Typography sx={downloadLinkText}>Download report</Typography>
+                <Typography sx={downloadLinkText}>Download Report</Typography>
                 <div
                   className="icon-container"
                   style={downloadIconContainerStyle}
@@ -624,22 +683,29 @@ export default function BasicCard() {
             <Grid item xs={12} sm={3}>
               <h6 className="table-title case-title">Case</h6>
               <br />
-              <Card sx={{ minWidth: 275 }}>
+              <Card style={leftCardStyle}>
                 <CardContent>
-                  <div className="left-card-title">Name of case</div>
+                  <div className="left-card-title">Name of Case</div>
                   <Typography variant="body2" sx={caseNameStyle}>
-                    Elsa peter
+                    Elsa Peter
                   </Typography>
 
                   <div class="horizontal-line"></div>
 
                   <div className="left-card-title">Status</div>
-                  <Typography variant="body2">staff</Typography>
+                  <Typography variant="body2">Staff</Typography>
 
                   <div class="horizontal-line"></div>
 
                   <div className="left-card-title">Time and date of onset</div>
                   <Typography variant="body2">Jun 30, 2021 10:00 AM</Typography>
+
+                  <div class="horizontal-line"></div>
+
+                  <div className="left-card-title">Infection type</div>
+                  <div variant="body2" className="left-card-content">
+                    {consequencesType}
+                  </div>
 
                   <div class="horizontal-line"></div>
 
@@ -664,10 +730,10 @@ export default function BasicCard() {
               </Card>
             </Grid>
             <Grid item xs={12} sm={9}>
-              <h5 className="table-title">List of contacts</h5>
+              <h5 className="table-title">List Of Contacts</h5>
 
               <br />
-              <Card sx={{ minWidth: 275 }}>
+              <Card sx={rightCardStyle}>
                 <Grid container className="table-header">
                   <Grid item xs={2}>
                     List of all contacts
@@ -678,11 +744,11 @@ export default function BasicCard() {
                     <SouthIcon style={tableArrowIconStyle} />
                   </Grid>
                   <Grid item xs={2}>
-                    Duration of contact
+                    Duration of Contact
                     <NorthIcon style={tableArrowIconStyle} />
                   </Grid>
                   <Grid item xs={2}>
-                    Proximity of contact
+                    Proximity of Contact
                     <NorthIcon style={tableArrowIconStyle} />
                   </Grid>
                   <Grid item xs={2}>
@@ -697,22 +763,22 @@ export default function BasicCard() {
                       <Grid container style={{ padding: "20px" }}>
                         <Grid item xs={2}>
                           <Typography variant="body2" sx={caseNameStyle}>
-                            Elsa peter
+                            Elsa Peter
                           </Typography>
                         </Grid>
                         <Grid item xs={2}>
                           <Typography variant="body2 left-card-content">
-                            staff
+                            Staff
                           </Typography>
                         </Grid>
                         <Grid item xs={2}>
                           <Typography variant="body2 left-card-content">
-                            5 min
+                            5 mins
                           </Typography>
                         </Grid>
                         <Grid item xs={2}>
                           <Typography variant="body2 left-card-content">
-                            3 m
+                            3m
                           </Typography>
                         </Grid>
                         <Grid item xs={2}>

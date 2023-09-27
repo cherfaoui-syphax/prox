@@ -1,0 +1,125 @@
+{
+  "auth": {
+    "webapp": {
+      "customAuth": false,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito",
+      "serviceType": "imported"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_auth_webapp_allowUnauthenticatedIdentities": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "webapp"
+        }
+      ]
+    },
+    "AMPLIFY_auth_webapp_authRoleArn": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "webapp"
+        }
+      ]
+    },
+    "AMPLIFY_auth_webapp_authRoleName": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "webapp"
+        }
+      ]
+    },
+    "AMPLIFY_auth_webapp_identityPoolId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "webapp"
+        }
+      ]
+    },
+    "AMPLIFY_auth_webapp_identityPoolName": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "webapp"
+        }
+      ]
+    },
+    "AMPLIFY_auth_webapp_nativeClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "webapp"
+        }
+      ]
+    },
+    "AMPLIFY_auth_webapp_unauthRoleArn": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "webapp"
+        }
+      ]
+    },
+    "AMPLIFY_auth_webapp_unauthRoleName": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "webapp"
+        }
+      ]
+    },
+    "AMPLIFY_auth_webapp_userPoolId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "webapp"
+        }
+      ]
+    },
+    "AMPLIFY_auth_webapp_userPoolName": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "webapp"
+        }
+      ]
+    },
+    "AMPLIFY_auth_webapp_webClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "webapp"
+        }
+      ]
+    },
+    "AMPLIFY_storage_webapp17509f72_bucketName": {
+      "usedBy": [
+        {
+          "category": "storage",
+          "resourceName": "webapp17509f72"
+        }
+      ]
+    },
+    "AMPLIFY_storage_webapp17509f72_region": {
+      "usedBy": [
+        {
+          "category": "storage",
+          "resourceName": "webapp17509f72"
+        }
+      ]
+    }
+  },
+  "storage": {
+    "webapp17509f72": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3",
+      "serviceType": "imported"
+    }
+  }
+}

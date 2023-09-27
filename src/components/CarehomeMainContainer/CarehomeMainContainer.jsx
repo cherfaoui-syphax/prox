@@ -112,10 +112,14 @@ function CarehomeMainContainer({ flags, ldClient, user, signOut }) {
   const teamSafeMenuOpen = Boolean(teamSafeMenuAnchorEl);
 
   const handleTeamSafeMenuClick = (event) => {
+    event.stopPropagation();
     setTeamSafeMenuAnchorEl(event.currentTarget);
   };
 
-  const handleTeamSafeMenuClose = () => {
+  const handleTeamSafeMenuClose = (event) => {
+    if (event) {
+      event.stopPropagation();
+    }
     setTeamSafeMenuAnchorEl(null);
   };
 
@@ -126,10 +130,14 @@ function CarehomeMainContainer({ flags, ldClient, user, signOut }) {
   const residentSafeMenuOpen = Boolean(residentSafeMenuAnchorEl);
 
   const handleResidentSafeMenuClick = (event) => {
+    event.stopPropagation();
     setResidentSafeMenuAnchorEl(event.currentTarget);
   };
 
-  const handleResidentSafeMenuClose = () => {
+  const handleResidentSafeMenuClose = (event) => {
+    if (event) {
+      event.stopPropagation();
+    }
     setResidentSafeMenuAnchorEl(null);
   };
 
@@ -140,10 +148,14 @@ function CarehomeMainContainer({ flags, ldClient, user, signOut }) {
   const assetSafeMenuOpen = Boolean(assetSafeMenuAnchorEl);
 
   const handleAssetSafeMenuClick = (event) => {
+    event.stopPropagation();
     setAssetSafeMenuAnchorEl(event.currentTarget);
   };
 
-  const handleAssetSafeMenuClose = () => {
+  const handleAssetSafeMenuClose = (event) => {
+    if (event) {
+      event.stopPropagation();
+    }
     setAssetSafeMenuAnchorEl(null);
   };
 
@@ -151,10 +163,10 @@ function CarehomeMainContainer({ flags, ldClient, user, signOut }) {
     "Newton House, Building 4"
   );
   const [logoUrl, setLogoUrl] = useState(
-    "https://proxximosamplifybucket133936-expstage.s3.eu-west-2.amazonaws.com/sunburst_care_services.png"
+    `${process.env.REACT_APP_S3_URL}/sunburst_care_services.png`
   );
   const [middleNavbarImage, setMiddleNavbarImage] = useState(
-    "https://proxximosamplifybucket133936-expstage.s3.eu-west-2.amazonaws.com/proxximos_safer_care.png"
+    `${process.env.REACT_APP_S3_URL}/proxximos_safer_care.png`
   );
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeNavLink, setActiveNavLink] = useState("Home");
@@ -176,15 +188,15 @@ function CarehomeMainContainer({ flags, ldClient, user, signOut }) {
   const [incidentInput4, setIncidentInput4] = useState("");
   const [wardsHovered, setWardsHovered] = useState(false);
 
-
   const teamSafeMenuItems = [
-    {label : "Team Safe Summary" , url : "/team-safe/team-safe-summary"} ,
-    {label : "Locate Team Member" , url : "/team-safe/locate-team-member"} ,
-    {label : "Investigate Event" , url : "/team-safe/investigate-event"} ,
-    {label : "Secure door Monitoring" , url : "/team-safe/secure-door-monitoring"}, 
-    {label : "Lone Working Insights" , url : "/team-safe/lone-working-insights"} ,
-
-
+    { label: "Team Safe Summary", url: "/team-safe/team-safe-summary" },
+    { label: "Locate Team Member", url: "/team-safe/locate-team-member" },
+    { label: "Investigate Event", url: "/team-safe/investigate-event" },
+    {
+      label: "Secure door Monitoring",
+      url: "/team-safe/secure-door-monitoring",
+    },
+    { label: "Lone Working Insights", url: "/team-safe/lone-working-insights" },
   ];
 
   const theme = createTheme({
@@ -473,6 +485,10 @@ function CarehomeMainContainer({ flags, ldClient, user, signOut }) {
     setMitigationText(evt.target.value);
   };
 
+  const onAvatarError = (e) => {
+    e.target.src = `${process.env.REACT_APP_S3_URL}/avatar.png`;
+  };
+
   React.useEffect(() => {
     if (location && location.pathname !== currentTab) {
       setCurrentTab(location.pathname);
@@ -585,9 +601,12 @@ function CarehomeMainContainer({ flags, ldClient, user, signOut }) {
                   <div style={upperAvatarContainerStyle}>
                     <Avatar
                       alt="My Profile"
-                      src={`https://proxximosamplifybucket133936-expstage.s3.eu-west-2.amazonaws.com/users/${encodeURIComponent(
+                      src={`${
+                        process.env.REACT_APP_S3_URL
+                      }/users/${encodeURIComponent(
                         user.attributes.email
                       ).replace("%20", "+")}/avatar.png`}
+                      imgProps={{ onError: onAvatarError }}
                     />
                   </div>
                   <div style={navbarUserInfo}>
@@ -691,6 +710,15 @@ function CarehomeMainContainer({ flags, ldClient, user, signOut }) {
                             >
                               Infection Control Consequences
                             </MenuItem>
+                            <MenuItem
+                              onClick={(event) => {
+                                event.stopPropagation();
+                                navigate("/infection-safe/add-new-case");
+                                handleInfectionSafeMenuClose();
+                              }}
+                            >
+                              Add New Case
+                            </MenuItem>
                           </Menu>
                         </>
                       }
@@ -713,11 +741,8 @@ function CarehomeMainContainer({ flags, ldClient, user, signOut }) {
                               teamSafeMenuOpen ? "true" : undefined
                             }
                             onClick={handleTeamSafeMenuClick}
-                            
                           >
-                            <span id="infection-safe-label">
-                              Team Safe
-                            </span>
+                            <span id="infection-safe-label">Team Safe</span>
                             <DownIcon
                               style={{
                                 ...downCaretStyle,
@@ -733,41 +758,35 @@ function CarehomeMainContainer({ flags, ldClient, user, signOut }) {
                             MenuListProps={{
                               "aria-labelledby": "infection-safe-label",
                             }}
-                            sx = {{
-                              "& .MuiMenu-list" : {
-                                paddingTop : 0,
-                                paddingBottom : 0 ,
-                              } , 
-                              "& .MuiPaper-root-MuiPopover-paper-MuiMenu-paper" : {
-                                top :"123px",
-                                left : "578px",
-                                backgroundColor : "red !important"
-                              }
+                            sx={{
+                              "& .MuiMenu-list": {
+                                paddingTop: 0,
+                                paddingBottom: 0,
+                              },
+                              "& .MuiPaper-root-MuiPopover-paper-MuiMenu-paper":
+                                {
+                                  top: "123px",
+                                  left: "578px",
+                                  backgroundColor: "red !important",
+                                },
                             }}
                             className="team-safe-menu"
                           >
-
-                            {
-                              teamSafeMenuItems.map((item) => { return (
-                                  <MenuItem
+                            {teamSafeMenuItems.map((item) => {
+                              return (
+                                <MenuItem
                                   onClick={(event) => {
                                     event.stopPropagation();
                                     navigate(item.url);
                                     handleTeamSafeMenuClose();
                                   }}
                                   className="team-safe-menu-item"
-                                  >
-                                    {item.label}
-                                  </MenuItem> )
-                                }
-                              )
-                            }
-                          
-                          
-                          
-                           
+                                >
+                                  {item.label}
+                                </MenuItem>
+                              );
+                            })}
                           </Menu>
-                          
                         </>
                       }
                       iconPosition="start"
@@ -840,13 +859,17 @@ function CarehomeMainContainer({ flags, ldClient, user, signOut }) {
                   path="/infection-safe/consequences"
                   element={<InfectionControlConsequences />}
                 />
+                <Route
+                  path="/infection-safe/add-new-case"
+                  element={<AddNewCase />}
+                />
                 <Route path="cases" element={<IncidentsListTab />} />
                 <Route
                   path="case/:incidentId/detail"
                   element={<CaseDetail />}
                 />
                 <Route path="map" element={<LiveMap />} />
-                <Route path="new-incident" element={<NewIncident />} />
+<Route path="new-incident" element={<NewIncident />} />
                 <Route path="add-new-case" element={<AddNewCase />} />
                 <Route path="/team-safe/team-safe-summary" element={<TeamSafeSummary/>} />
                 <Route path="/team-safe/locate-team-member" element={<LocateTeamMember/>} />

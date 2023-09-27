@@ -1,0 +1,67 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-webapp-expstage-144519-authRole",
+      "UnauthRoleArn": "arn:aws:iam::044675806302:role/amplify-webapp-expstage-144519-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::044675806302:role/amplify-webapp-expstage-144519-authRole",
+      "Region": "eu-west-2",
+      "DeploymentBucketName": "amplify-webapp-expstage-144519-deployment",
+      "UnauthRoleName": "amplify-webapp-expstage-144519-unauthRole",
+      "StackName": "amplify-webapp-expstage-144519",
+      "StackId": "arn:aws:cloudformation:eu-west-2:044675806302:stack/amplify-webapp-expstage-144519/7ad060e0-5d44-11ee-9a02-0696f2347020",
+      "AmplifyAppId": "d336wtk9h2gows"
+    }
+  },
+  "auth": {
+    "webapp": {
+      "service": "Cognito",
+      "serviceType": "imported",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "output": {
+        "UserPoolId": "eu-west-2_Wm5DX2crR",
+        "UserPoolName": "ProxximosAppUserPool",
+        "AppClientID": "7qk9ev48rii6ad4d4p6j06kapn",
+        "AppClientIDWeb": "7qk9ev48rii6ad4d4p6j06kapn",
+        "IdentityPoolId": "eu-west-2:12f7c1de-68cb-4730-929a-9c819c62f2d7",
+        "IdentityPoolName": "AmplifyCDKIdentityPool_SnsSKyIpLnsp"
+      },
+      "frontendAuthConfig": {
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "signupAttributes": [],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": [
+            "REQUIRES_LOWERCASE",
+            "REQUIRES_UPPERCASE",
+            "REQUIRES_NUMBERS",
+            "REQUIRES_SYMBOLS"
+          ]
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "lastPushTimeStamp": "2023-09-27T16:25:54.587Z"
+    }
+  },
+  "storage": {
+    "webapp17509f72": {
+      "service": "S3",
+      "serviceType": "imported",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "output": {
+        "BucketName": "proxximosbucket",
+        "Region": "eu-west-2"
+      },
+      "lastPushTimeStamp": "2023-09-27T16:25:54.587Z"
+    }
+  }
+}

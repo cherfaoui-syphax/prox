@@ -2,25 +2,16 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import "./style.css";
-import DownloadIcon from "@mui/icons-material/Download";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
-import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
-  >
-    •
-  </Box>
-);
+import {
+  South as SouthIcon,
+  North as NorthIcon,
+  Download as DownloadIcon,
+  KeyboardArrowDown as KeyboardArrowDownIcon,
+  AddCircleRounded as AddCircleRoundedIcon,
+  SearchRounded as SearchRoundedIcon,
+} from "@mui/icons-material";
 
 function formatDate(date) {
   const daysOfWeek = [
@@ -77,6 +68,12 @@ const titleStyle = {
   fontWeight: 700,
 };
 
+const rightCardStyle = {
+  borderRadius: "8px",
+  boxShadow: "none",
+  minWidth: "275px",
+};
+
 const buttonTextStyle = {
   marginBottom: 1.5,
   color: "white",
@@ -130,7 +127,7 @@ const searchWrapperButtonContainerStyle = {
 };
 
 const downloadLinkText = {
-  marginBottom: 1.5,
+  marginBottom: 0,
   color: "#283555",
   textDecoration: "underline",
   fontWeight: 600,
@@ -156,19 +153,29 @@ const downloadIconContainerStyle = {
   justifyContent: "center",
   alignItems: "center",
   backgroundColor: "#eaf0ff",
-  marginTop: 2,
+  marginTop: "10px",
+};
+
+const tableArrowIconStyle = {
+  color: "#919191",
+  fontSize: "11px",
+  marginLeft: "2px",
+  marginTop: "4px",
+  paddingTop: "2px",
 };
 
 const downloadContainerStyle = {
   display: "inline-flex",
   alignItems: "center",
   position: "relative",
+  marginLeft: "25px",
 };
 
 const mainContainerNavStyle = {
-  display: "flex",
+  display: "inline-flex",
   alignItems: "center",
   justifyContent: "space-between",
+  width: "100%",
   marginBottom: 20,
 };
 
@@ -179,7 +186,6 @@ const tableCaretDownIconStyle = {
 const tableLinkStyle = {
   mb: 1.5,
   mt: "2px",
-  textDecoration: "underline",
   color: "#01C1D3",
   fontWeight: 600,
   fontSize: 12,
@@ -235,22 +241,20 @@ export default function InfectionControlSummary() {
             <button className="view-map-button" style={buttonStyle}>
               <Typography sx={buttonTextStyle}>Map View</Typography>
             </button>
-          </div>
 
-          <div class="search-wrapper" style={searchWrapperStyle}>
-            <input
-              placeholder="Search this page"
-              type="text"
-              style={searchWrapperInputStyle}
-            />
-            <button style={searchWrapperButtonContainerStyle}>
-              <SearchRoundedIcon sx={searchWrapperButtonStyle} />
-            </button>
-          </div>
+            <div class="search-wrapper" style={searchWrapperStyle}>
+              <input
+                placeholder="Search this page.."
+                type="text"
+                style={searchWrapperInputStyle}
+              />
+              <button style={searchWrapperButtonContainerStyle}>
+                <SearchRoundedIcon sx={searchWrapperButtonStyle} />
+              </button>
+            </div>
 
-          <div style={{ display: "inline-flex" }}>
             <div style={downloadContainerStyle}>
-              <Typography sx={downloadLinkText}>Download report</Typography>
+              <Typography sx={downloadLinkText}>Download Report</Typography>
               <div
                 className="icon-container"
                 style={downloadIconContainerStyle}
@@ -266,7 +270,7 @@ export default function InfectionControlSummary() {
 
         <br></br>
 
-        <Card sx={{ minWidth: 275 }}>
+        <Card sx={rightCardStyle}>
           <Grid
             container
             style={{
@@ -280,12 +284,14 @@ export default function InfectionControlSummary() {
           >
             <Grid item xs={1}>
               Name of case
+              <SouthIcon style={tableArrowIconStyle} />
             </Grid>
             <Grid item xs={1}>
               Status
+              <SouthIcon style={tableArrowIconStyle} />
             </Grid>
             <Grid item xs={2}>
-              Time and date of ofset
+              Time and date of onset
             </Grid>
             <Grid item xs={2}>
               Infections type
@@ -297,7 +303,7 @@ export default function InfectionControlSummary() {
               No of exposed contacts
             </Grid>
             <Grid item xs={2}>
-              No of exposed rooms
+              No of contaminated rooms
             </Grid>
           </Grid>
 
@@ -324,11 +330,11 @@ export default function InfectionControlSummary() {
                       fontFamily: "Open Sans",
                     }}
                   >
-                    Elsa peter
+                    Elsa Peter
                   </Typography>
                 </Grid>
                 <Grid item xs={1}>
-                  staff
+                  Staff
                 </Grid>
                 <Grid item xs={2}>
                   {formattedDate}
@@ -371,7 +377,7 @@ export default function InfectionControlSummary() {
                           fontFamily: "Open Sans",
                         }}
                       >
-                        List of contacts
+                        List of Contacts
                       </Typography>
                     </span>
                   </div>

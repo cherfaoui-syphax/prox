@@ -36,6 +36,10 @@ body {
   font-family: "Open Sans";
 }
 
+#frame.carehome + .cant-log-in {
+  display: none;
+}
+
 #frame.carehome + .cant-log-in + .bottom-navbar {
   margin-top: 70px;
   display: none;
