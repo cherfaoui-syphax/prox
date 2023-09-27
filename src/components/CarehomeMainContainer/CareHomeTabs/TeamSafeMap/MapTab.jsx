@@ -299,7 +299,7 @@ function MapTab() {
 
   return (
     <div style={{ display: "flex" }}>
-      <div className="map-container" style={{backgroundColor:"white"}}>
+      <div className="map-container" style={{backgroundColor:"white" , padding : 0}}>
 
         <div style={{
           position : "absolute",

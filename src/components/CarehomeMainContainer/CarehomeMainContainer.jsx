@@ -43,6 +43,7 @@ import { withLDConsumer, useFlags } from "launchdarkly-react-client-sdk";
 import AddNewCase from "./CareHomeTabs/AddNewCase";
 import TeamSafeSummary from "./CareHomeTabs/TeamSafeMap/TeamSafeMap";
 import LocateTeamMember from "./CareHomeTabs/TeamSafeMap/LocateTeamMember";
+import ViewMapReplay from "./CareHomeTabs/TeamSafeMap/ViewMapReplay";
 import "./CareHomeTabs/style.css";
 
 function CarehomeMainContainer({ flags, ldClient, user, signOut }) {
@@ -849,6 +850,8 @@ function CarehomeMainContainer({ flags, ldClient, user, signOut }) {
                 <Route path="add-new-case" element={<AddNewCase />} />
                 <Route path="/team-safe/team-safe-summary" element={<TeamSafeSummary/>} />
                 <Route path="/team-safe/locate-team-member" element={<LocateTeamMember/>} />
+                <Route path="/team-safe/map-replay" element={<ViewMapReplay/>} />
+
               </Routes>
             </Box>
           </Grid>
