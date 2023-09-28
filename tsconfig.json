@@ -1,13 +1,11 @@
 {
   "compilerOptions": {
-
     "target": "es5",
     "lib": [
       "dom",
       "dom.iterable",
       "esnext"
     ],
-
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -19,16 +17,13 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "preserve",
-    "baseUrl": "./src",         // Base directory for resolving imports
-    "paths": {
-        "@components/*": ["components/*"],  // Path mapping example
-        //"@utils/*": ["src/utils/*"] , 
-        "@src/*" : ["./*"] 
-
-      }
+    "jsx": "preserve"
   },
-
-  "include": ["./**/*"],  // Include all files in the "src" directory
-  "exclude": ["node_modules", "build"]  // Exclude specified directories
+  "include": [
+    "./**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "build"
+  ]
 }

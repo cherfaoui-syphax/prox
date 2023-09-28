@@ -313,4 +313,9 @@ border:none;
 .team-safe-menu .MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded {
   margin-left: -23px;
   margin-top: 11px;
+
+}
+
+.controls-ui > *{
+  margin-left: 12px;
 }

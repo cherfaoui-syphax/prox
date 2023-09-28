@@ -28,7 +28,7 @@ import { color } from "./diseaseColor";
 import ZoomInIcon from '@mui/icons-material/ZoomIn';
 import ZoomOutIcon from '@mui/icons-material/ZoomOut';
 
-const zoomIconStyle = {
+const zoomIconStyle_def = {
   color: "#283555",
   fontSize: 31,
   background: "transparent",
@@ -36,7 +36,7 @@ const zoomIconStyle = {
   padding: 0,
 };
 
-const zoomIconContainerStyle = {
+const zoomIconContainerStyle_def = {
   position: "relative",
   width: 50,
   height: 50,
@@ -49,10 +49,17 @@ const zoomIconContainerStyle = {
   cursor : "pointer",
 };
 
+const zoomPositionStyle_def = {
+  position : "absolute",
+  left : 30 , 
+  top : 15 ,
+  display : "block",
+  zIndex : 5 ,
+} ;
 
 
 
-function MapTab() {
+function MapTab({zoomIconContainerStyle = zoomIconContainerStyle_def , zoomPositionStyle = zoomPositionStyle_def , zoomIconStyle = zoomIconStyle_def , bgColor = "white"  }) {
   //const [svgMap, setSvgMap] = React.useState();
   const panZoom = React.useRef();
   const [data, setData] = React.useState();
@@ -299,15 +306,9 @@ function MapTab() {
 
   return (
     <div style={{ display: "flex" }}>
-      <div className="map-container" style={{backgroundColor:"white" , padding : 0}}>
+      <div className="map-container" style={{backgroundColor: bgColor , padding : 0}}>
 
-        <div style={{
-          position : "absolute",
-          left : 30 , 
-          top : 15 ,
-          display : "block",
-          zIndex : 5 ,
-        }}>
+        <div style={zoomPositionStyle}>
           <button
                 className="icon-container"
                 style={zoomIconContainerStyle}

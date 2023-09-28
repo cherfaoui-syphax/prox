@@ -90,42 +90,7 @@ function NewIncident() {
 
   const addNewIncident = async () => {
     const rand_id = getRandomInt(100);
-    let beaconId;
-    Object.keys(dummyMetadata).forEach((key) => {
-      if (dummyMetadata[key].name === fullName) {
-        beaconId = key;
-      }
-    });
-    await fetch(
-      `${process.env.REACT_APP_API_URL}/newincident?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsImlhdCI6MTYwMDk3MzUxMywiZXhwIjoxNjAxNTc4MzEzfQ.OymFrLMMYgFAnYpveZPTgJVg6shCMhducqmZ21oYzY8&ward=2`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          Item: {
-            incident_id: rand_id,
-            id: beaconId,
-            index: {
-              name: fullName,
-              id: beaconId,
-            },
-            pathogen: inputPathogen,
-            pathogenCategory: inputPathogenCategory,
-            date,
-            role: inputRole,
-            notes: [details],
-          },
-        }),
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setSavingIncident(false);
-        navigate("/cases");
-      })
-      .catch((error) => console.error(error));
+
   };
 
   React.useEffect(() => {

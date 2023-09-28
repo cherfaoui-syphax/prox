@@ -11,6 +11,8 @@ import Radio from "@mui/material/Radio";
 
 import Checkbox from "@mui/material/Checkbox";
 import CheckCircle from "@mui/icons-material/CheckCircle";
+import CircleCheckedFilled from '@mui/icons-material/CheckCircle';
+import CircleUnchecked from '@mui/icons-material/RadioButtonUnchecked';
 import "./style.css";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
@@ -134,6 +136,13 @@ const actionTakenCheckCircleStyle = {
 
 export default function AddNewCase() {
   const [radioValue, setRadioValue] = React.useState("a");
+  const [checked, setChecked] = React.useState(false);
+
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+  };
+
+
 
   const handleRadioChange = (event) => {
     setRadioValue(event.target.value);
@@ -293,14 +302,23 @@ export default function AddNewCase() {
           </Grid>
           <Grid item xs={3.8}>
             <div style={actionTakenStyle}>
-              {/* <Checkbox
+              <Checkbox
                 {...label}
-                sx={{
-                  "& .MuiSvgIcon-root": { color: "#84D95B", fontSize: "28px" },
-                }}
-              /> */}
+                checked={checked}
+                onChange={handleChange}
+                inputProps={{ 'aria-label': 'controlled' }}
+                checkedIcon={<CircleCheckedFilled />}
 
-              <CheckCircle style={actionTakenCheckCircleStyle} />
+                sx={{
+                  "& .MuiSvgIcon-root": {
+                    color :   checked ? "#84D95B" : "#EAEAEA" , 
+                    fontSize: "28px",
+                    backgroundColor: checked ? "transparent" : "#EAEAEA",
+                    borderRadius: "500px", },
+                }}
+                
+              />
+
               <label for="name" style={radioLabelStyle}>
                 Action taken
               </label>

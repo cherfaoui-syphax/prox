@@ -1,111 +1,204 @@
 import React, { useRef, useState } from 'react';
-import { IconButton, Slider, Tooltip, Typography } from '@mui/material';
+import { IconButton, Tooltip, Typography } from '@mui/material';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
+import FastForwardIcon from '@mui/icons-material/FastForward';
+import FastRewindIcon from '@mui/icons-material/FastRewind';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import VolumeDownIcon from '@mui/icons-material/VolumeDown';
 import VolumeMuteIcon from '@mui/icons-material/VolumeOff';
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
 import VolumeOffIcon from "@mui/icons-material/VolumeOff";
+import SvgIcon from '@mui/material/SvgIcon';
 
-function VideoPlayer() {
-  const videoRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
-  const [volume, setVolume] = useState(1);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [isFullScreen, setIsFullScreen] = useState(false);
+import Slider, { SliderThumb } from '@mui/material/Slider';
+import { styled } from '@mui/material/styles';
 
-  const togglePlayPause = () => {
-    if (videoRef.current.paused) {
-      videoRef.current.play();
-      setIsPlaying(true);
-    } else {
-      videoRef.current.pause();
-      setIsPlaying(false);
-    }
+import "../style.css"
+
+import { Line } from 'react-chartjs-2';
+import { Chart as ChartJS } from 'chart.js/auto'
+import { Chart }            from 'react-chartjs-2'
+
+
+
+function SimpleLineChart( props) {
+  // Sample data for the chart
+  const data = {
+    labels: ['January', 'February', 'March', 'April', 'May'],
+    datasets: [
+      {
+        data: [10, 20, 15, 25, 30],
+        borderColor: 'rgba(169, 169, 169, 1)', // Grey color
+        borderWidth: 2,
+        pointRadius: 0, // Hide data points
+      },
+    ],
   };
 
-  const toggleMute = () => {
-    videoRef.current.muted = !videoRef.current.muted;
-    setIsMuted(videoRef.current.muted);
-  };
+  // Customize chart options to hide axis and labels
+  const options = {
+    responsive: true, // Enable responsive sizing
+    aspectRatio: 8, // Set the aspect ratio (width-to-height) to 2:1
 
-  const handleVolumeChange = (event, newValue) => {
-    setVolume(newValue);
-    videoRef.current.volume = newValue;
-  };
-
-  const handleTimeChange = (event, newValue) => {
-    setCurrentTime(newValue);
-    videoRef.current.currentTime = newValue;
-  };
-
-  const handleFullScreen = () => {
-    if (!isFullScreen) {
-      if (videoRef.current.requestFullscreen) {
-        videoRef.current.requestFullscreen();
-      } else if (videoRef.current.mozRequestFullScreen) {
-        videoRef.current.mozRequestFullScreen();
-      } else if (videoRef.current.webkitRequestFullscreen) {
-        videoRef.current.webkitRequestFullscreen();
-      }
-      setIsFullScreen(true);
-    } else {
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
-      } else if (document.mozCancelFullScreen) {
-        document.mozCancelFullScreen();
-      } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen();
-      }
-      setIsFullScreen(false);
-    }
+    plugins: {
+      legend: {
+        display: false, // Hide legend
+      },
+    },
+    scales: {
+      x: {
+        display: false, // Hide x-axis
+      },
+      y: {
+        display: false, // Hide y-axis
+      },
+    },
   };
 
   return (
     <div>
-      <div style={{display : "flex"}}>
-        <Tooltip title={isPlaying ? 'Pause' : 'Play'}>
-          <IconButton onClick={togglePlayPause}>
-            {isPlaying ? <PauseIcon /> : <PlayArrowIcon />}
-          </IconButton>
-        </Tooltip>
+      <Line data={data} options={options} {...props} />
+    </div>
+  );
+}
 
-        <Tooltip title={isMuted ? 'Unmute' : 'Mute'}>
-          <IconButton onClick={toggleMute}>
-            {isMuted ? <VolumeMuteIcon /> : volume === 0 ? <VolumeOffIcon /> : volume < 0.5 ? <VolumeDownIcon /> : <VolumeUpIcon />}
-          </IconButton>
-        </Tooltip>
 
-        <Slider
-          value={volume}
-          onChange={handleVolumeChange}
-          min={0}
-          max={1}
-          step={0.01}
-          style={{ width: 100 }}
-        />
 
-        <Typography variant="body2" style={{ minWidth: 60 }}>
-          {Math.floor(currentTime)}s / {Math.floor(duration)}s
+const timeStye = {
+  color : "#777F9E",
+  fontSize : "12px",
+  marginBottom : "13px" , 
+  minWidth : "60px",
+}
+
+const buttonWrapperStyle= {
+  backgroundColor: "#C9D3EB",
+  padding: "8px 8px"
+};
+
+const iconStyle = {
+  fontSize: "24px",
+  color: "#283555"
+}
+
+const customSliderStyle = {
+  '& .MuiSlider-thumb': {
+      color: "#00828E",
+  },
+  '& .MuiSlider-track': {
+      color: "#01C1D3", 
+      height: "13px",
+  },
+  '& .MuiSlider-rail': {
+      color: "#C9D3EB",
+      height: "13px",
+
+  },
+
+};
+
+
+function VideoPlayer() {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(10);
+
+
+  const handleTimeChange = (event, newValue) => {
+    setCurrentTime(newValue);
+  };
+  
+  const handleFastForward = () => {
+    setCurrentTime(duration);
+  }
+
+  const handleFastRewind = () => {
+    setCurrentTime(0);
+  }
+
+  const togglePlayPause = () => {
+      setIsPlaying(!isPlaying);
+  };
+
+
+
+
+
+
+
+
+  return (
+    <div style={{marginLeft : "10px" , marginRight:"22px",marginBottom : "34px" , marginTop:"5px"}}>
+        <Typography 
+          variant="body2" 
+          style={{...timeStye,
+            marginTop : "10px",
+            marginLeft : "12px",
+          }} >
+          Proximity
         </Typography>
 
-        <Slider
-          value={currentTime}
-          onChange={handleTimeChange}
-          min={0}
-          max={duration}
-          step={1}
-          style={{ width: '100%' }}
-        />
+      <div className = "controls-ui" style={{display : "flex" , alignItems :"flex-end"}} >
+        <div>
+          <Tooltip title={isPlaying ? 'Pause' : 'Play'}>
+            <IconButton onClick={togglePlayPause} style={buttonWrapperStyle}>
+              {isPlaying ? <PauseIcon style={iconStyle} /> : <PlayArrowIcon style={iconStyle}  />}
+            </IconButton>
+          </Tooltip>
+        </div>
 
-        <Tooltip title={isFullScreen ? 'Exit Fullscreen' : 'Fullscreen'}>
-          <IconButton onClick={handleFullScreen}>
-            <FullscreenIcon />
-          </IconButton>
-        </Tooltip>
+        <div>
+          <Tooltip title="rewind">
+            <IconButton onClick={handleFastRewind} style={buttonWrapperStyle}>
+                <FastRewindIcon style={iconStyle} />
+            </IconButton>
+          </Tooltip>
+        </div>
+
+        <div>
+          <Typography variant="body2" style={timeStye} >
+            {Math.floor(currentTime)}s / {Math.floor(duration)}s
+          </Typography>
+        </div>
+
+          <div style={{ width: '100%' }} >
+
+              <SimpleLineChart  
+                  style={{
+                  width: '95%',
+                  height: '80px',
+                  display: 'block',
+                  margin: 'auto',
+              }} />
+
+            <Slider
+              value={currentTime}
+              onChange={handleTimeChange}
+              min={0}
+              max={duration}
+              step={1}
+              sx = {customSliderStyle}
+            />
+
+          </div>
+
+
+        <div>
+          <Typography variant="body2" style={timeStye} >
+            {Math.floor(currentTime)}s / {Math.floor(duration)}s
+          </Typography>
+        </div>
+
+
+        <div>
+          <Tooltip title="fast forward">
+            <IconButton onClick={handleFastForward} style={buttonWrapperStyle}>
+                <FastForwardIcon style={iconStyle} />
+            </IconButton>
+          </Tooltip>
+        </div>
+
       </div>
     </div>
   );

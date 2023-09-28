@@ -13,6 +13,7 @@ import Card from "@mui/material/Card";
 import { CardContent } from '@mui/material';
 import MapTab from "./MapTab";
 import VideoControlUi from "./VideoControlUi";
+import PersonIcon from '@mui/icons-material/Person';
 
 const caseNameStyle = {
     fontWeight: 600,
@@ -165,6 +166,37 @@ const modalStyle = {
   border : "none" 
 };
 
+const zoomIconStyle = {
+  color: "white",
+  fontSize: 31,
+  background: "transparent",
+  margin: 0,
+  padding: 0,
+};
+
+const zoomIconContainerStyle = {
+  position: "relative",
+  width: 50,
+  height: 50,
+  padding: 10,
+  backgroundColor: "#283555",
+  marginTop: 25,
+  marginRight: 27,
+  display : "block",
+  border : "none ",
+  cursor : "pointer",
+};
+
+const zoomPositionStyle = {
+  position : "absolute",
+  right : "0px" , 
+  top : "200px" ,
+  display : "block",
+  zIndex : 5 ,
+} ;
+
+
+
 export default function BasicModal() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -185,9 +217,12 @@ export default function BasicModal() {
 
 
             <div style={mainContainerNavStyle}>
-                <CloseIcon style={{
+                <CloseIcon
+                  onClick={handleClose}
+                  style={{
                     fontSize: 41 ,
-                    color : "#8F9AB5"
+                    color : "#8F9AB5",
+                    cursor : "pointer",
                 }}></CloseIcon>
                 <button className="add-new-infection-button" style={buttonStyle}>
                     <Typography sx={buttonTextStyle}>
@@ -231,9 +266,23 @@ export default function BasicModal() {
                     <Card sx={{ backgroundColor : "#EFF4FF" , width :"90%"}}>
                         <CardContent>
                         <div className="left-card-title">Name of Case</div>
-                        <Typography variant="body2" sx={caseNameStyle}>
-                            Elsa peter
-                        </Typography>
+                        <div style={{
+                          display : "flex",
+                          justifyContent : "space-between",
+                          alignItems : "center"
+                        }}>
+                          <Typography variant="body2" sx={caseNameStyle}>
+                              Elsa peter
+                          </Typography>
+                            <PersonIcon style={{
+                              color :"white",
+                              padding : "5px",
+                              backgroundColor : "#E326DC",
+                              borderRadius : "500px",
+                              fontSize : "30px"
+                            }}></PersonIcon>
+                          
+                          </div>
 
                         <div class="horizontal-line"></div>
 
@@ -261,7 +310,27 @@ export default function BasicModal() {
 
                     <Card sx={{ backgroundColor : "#EFF4FF" , width :"90%" , marginTop : "20px"}}>
                         <CardContent>
+                          <div className="left-card-title">Name of contact</div>
+                          <div style={{
+                            display : "flex",
+                            justifyContent : "space-between",
+                            alignItems : "center"
+                          }}>
+
+                            <Typography variant="body2" sx={caseNameStyle}>
+                                Peter whawell
+                            </Typography>
+                              <PersonIcon style={{
+                                color :"white",
+                                padding : "5px",
+                                backgroundColor : "#FF892D",
+                                borderRadius : "500px",
+                                fontSize : "30px"
+                              }}></PersonIcon>
                             
+                            </div>
+
+                            <div class="horizontal-line"></div>
                             <div className="left-card-title">Action for case</div>
                             <div
                                 style={{
@@ -277,30 +346,37 @@ export default function BasicModal() {
                             </div>
                             <div class="horizontal-line"></div>
 
-                            <div className="left-card-title">No of contaminated room</div>
+                            <div className="left-card-title">Date & Time</div>
 
-                            <div className="left-card-content">4</div>
+                            <div className="left-card-content">Jun 30, 2021 10:00 AM</div>
 
-                            <div class="horizontal-line"></div>
-
-                            <div className="left-card-title">No of exposed contacts</div>
-
-                            <div className="left-card-content">8</div>
                         </CardContent>
                     </Card>
 
                 </Grid>
 
                 <Grid item xs = {9}>
+
                     <div style={{
                         width : "100%",
                         height : "360px",
                         overflow : "hidden",
                         backgroundColor : "#EFF4FF",
+                        borderRadius: "8px"
                     }} >
-                        <VideoControlUi></VideoControlUi>
+                        <MapTab
+                          bgColor='#EFF4FF'
+                          zoomIconStyle={zoomIconStyle}
+                          zoomIconContainerStyle={zoomIconContainerStyle}
+                          zoomPositionStyle={zoomPositionStyle}
+                        ></MapTab>
 
                     </div>
+                    <Card sx={{ backgroundColor : "#EFF4FF" , width :"100%" , marginTop : "20px"}}>
+                      <CardContent>
+                        <VideoControlUi></VideoControlUi>
+                      </CardContent>
+                    </Card>
 
                     
                 </Grid>
